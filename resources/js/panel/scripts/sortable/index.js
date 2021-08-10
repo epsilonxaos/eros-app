@@ -73,3 +73,20 @@ if(document.querySelector('.form-submit-alert-wait')) {
 
     });
 }
+
+window.changeStatusGeneral = function (el, id, status, route) {
+    axios.post(route, {
+        id: id,
+        status: status
+    })
+    .then(function (response) {
+        console.log(response);
+        document.querySelector('label.'+el).removeAttribute('onclick');
+        let n = status == 1 ? 0 : 1;
+        document.querySelector('label.'+el).setAttribute('onclick', 'cambiar_status(\''+el+'\', '+id+', '+n+', \''+route+'\')');
+        alertify.notify('Hecho!', 'success', 2);
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+}

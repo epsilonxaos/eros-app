@@ -3,7 +3,7 @@ require('./argon');
 require('./dataTable');
 require('./Trumbowyg');
 require('./tags-input');
-// require('./sortable');
+require('./sortable');
 
 import './validation';
 import './delete-button';

@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 // Panel
 Route::get('/', 'AdminController@unauthenticated')->name('panel.admins.unauthenticated');
 Route::prefix('/admin')->group(function(){
@@ -43,6 +45,7 @@ Route::prefix('/admin')->group(function(){
         });
     });
 
+    // Seo
     Route::prefix('/seo')->middleware('auth:admin')->group(function(){
         Route::get('/', 'SettingController@index')->name('panel.seo.index');
         Route::post('/update/{id}', 'SettingController@update')->name('panel.seo.update');
@@ -56,14 +59,30 @@ Route::prefix('/admin')->group(function(){
         Route::put('/editar/seo', 'SettingController@update')->name('panel.settings.seo.update');
     });
 
-    //Portafolio
-    Route::prefix('/portafolio') -> middleware('auth:admin') -> group(function(){
-        Route::prefix('/categorias') -> group(function () {
-            Route::get('/', 'PortafolioCategoriasController@index') -> name('panel.portafolio.categorias.index');
-            Route::put('/add', 'PortafolioCategoriasController@store') -> name('panel.portafolio.categorias.store');
-            Route::post('/update', 'PortafolioCategoriasController@update') -> name('panel.portafolio.categorias.update');
-            Route::delete('/destroy/{id}', 'PortafolioCategoriasController@destroy') -> name('panel.portafolio.categorias.destroy');
+    // Eros - Catalogo
+    Route::prefix('/eros') -> middleware('auth:admin') -> group(function(){
+        //Establecimientos
+        Route::prefix('/establecimientos') -> group(function () {
+            Route::get('/', 'EstablecimientoController@index') -> name('panel.eros.establecimientos.index');
+            Route::get('/create', 'EstablecimientoController@create') -> name('panel.eros.establecimientos.create');
+            Route::put('/create/store', 'EstablecimientoController@store') -> name('panel.eros.establecimientos.store');
+            Route::get('/edit/{id}', 'EstablecimientoController@edit') -> name('panel.eros.establecimientos.edit');
+            Route::post('/edit/{id}/update', 'EstablecimientoController@update') -> name('panel.eros.establecimientos.update');
+            Route::delete('/destroy/{id}', 'EstablecimientoController@destroy') -> name('panel.eros.establecimientos.destroy');
+            Route::post('/change/status', 'EstablecimientoController@changeStatus') -> name('panel.eros.establecimiento.status');
         });
+
+        // Categorias
+        // Route::prefix('/categorias') -> group(function () {
+        //     Route::get('/', 'PortafolioCategoriasController@index') -> name('panel.portafolio.categorias.index');
+        //     Route::put('/add', 'PortafolioCategoriasController@store') -> name('panel.portafolio.categorias.store');
+        //     Route::post('/update', 'PortafolioCategoriasController@update') -> name('panel.portafolio.categorias.update');
+        //     Route::delete('/destroy/{id}', 'PortafolioCategoriasController@destroy') -> name('panel.portafolio.categorias.destroy');
+        // });
+    });
+
+    Route::prefix('/establecimientos') -> middleware('auth:admin') -> group(function(){
+        
 
         Route::get('/', 'PortafolioController@index') -> name('panel.portafolio.index');
         Route::get('/create', 'PortafolioController@create') -> name('panel.portafolio.create');
