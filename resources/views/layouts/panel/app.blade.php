@@ -17,10 +17,15 @@
 
     <link rel="stylesheet" href="{{asset('panel/dropify/css/dropify.min.css')}}">
     <link rel="stylesheet" href="{{asset('panel/dropify/css/dropify-multiple.min.css')}}">
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+
     <link rel="stylesheet" href="{{asset('panel/alertify/alertify.min.css')}}">
     <!-- Argon CSS -->
     <link rel="stylesheet" href="{{asset('panel/css/custom.css?v=1.2.0')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('panel/css/main.css?v=1.2.0')}}" type="text/css">
+
     <style>
         .breadcrumb {
             padding: 6px 15px

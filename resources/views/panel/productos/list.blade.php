@@ -25,12 +25,12 @@
 					<div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col-12 col-sm-6">
-                                <h3 class="mb-0 mr-4">Listado de portafolios</h3>
+                                <h3 class="mb-0 mr-4">Listado de registros</h3>
                             </div>
                             <div class="col-12 col-sm-6 text-center text-sm-right">
-                                @can(PermissionKey::Portafolio['permissions']['create']['name'])
-                                    <a href="{{route('panel.portafolio.create')}}" class="btn btn-success pt-2 pb-2"><i class="fas fa-plus mr-2"></i> Agregar</a>
-                                @endcan
+                                <a href="{{route('panel.eros.productos.create')}}" class="btn btn-success pt-2 pb-2"><i class="fas fa-plus mr-2"></i> Agregar</a>
+                                {{-- @can(PermissionKey::Portafolio['permissions']['create']['name'])
+                                @endcan --}}
                             </div>
                         </div>
 					</div>
@@ -39,10 +39,10 @@
 						<table class="table align-items-center table-flush" id="dataTable">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col" class="no-sort" data-sort="portada" width="200px">Portada</th>
-									<th scope="col" class="no-sort" data-sort="titulo">Titulo</th>
+									{{-- <th scope="col" class="no-sort" data-sort="portada" width="200px">Cover</th> --}}
+									<th scope="col" class="no-sort" data-sort="titulo">Nombre</th>
 									<th scope="col" class="no-sort" data-sort="categoria">Categoria</th>
-									<th scope="col" class="no-sort text-center" data-sort="fecha">Fecha publicación</th>
+									<th scope="col" class="no-sort text-center" data-sort="fecha">Fecha creación</th>
 									<th scope="col" class="no-sort text-center" width="200px">Visualizar</th>
 									<th scope="col" class="no-sort text-center" width="150px">Acciones</th>
 								</tr>
@@ -51,42 +51,42 @@
 								@if ((isset($lista)) && (count($lista) > 0))
                                     @foreach ($lista as $num => $row)
                                         <tr>
-                                            <td>
-                                                <div class="bg" style="background-image: url({{asset($row -> portada)}});"></div>
+                                            {{-- <td>
+                                                <div class="bg" style="background-image: url({{asset($row -> cover)}});"></div>
+                                            </td> --}}
+                                            <td class="font-weight-bold">
+                                                {{ $row -> nombre }}
                                             </td>
                                             <td class="font-weight-bold">
-                                                {{ $row -> titulo }}
-                                            </td>
-                                            <td>
-                                                {{ $row -> titulo_categoria }}
+                                                {{ $row -> categoria_id }}
                                             </td>
                                             <td class="text-center">
-                                                {{ \App\FormatFecha::fechaEsp($row -> created_at) }}
+                                                {{ \App\Helpers::dateSpanishShort($row -> created_at) }}
                                             </td>
                                             <td>
-                                                @can(PermissionKey::Portafolio['permissions']['status']['name'])
-                                                    <div class="wp">
-                                                        <input class="tgl tgl-light chkbx-toggle" id="toggle_{{$num}}" type="checkbox" value="{{$row -> id}}" {{($row -> status == 1) ? 'checked="checked"' : ''}}"/>
-                                                        <label class="tgl-btn toggle_{{$num}}" for="toggle_{{$num}}" onclick="cambiar_status('toggle_{{$num}}', {{$row -> id}}, {{($row -> status == 1) ? 0 : 1}})"></label>
-                                                    </div>
+                                                <div class="wp">
+                                                    <input class="tgl tgl-light chkbx-toggle" id="toggle_{{$num}}" type="checkbox" value="{{$row -> id}}" {{($row -> status == 1) ? 'checked="checked"' : ''}}"/>
+                                                    <label class="tgl-btn toggle_{{$num}}" for="toggle_{{$num}}" onclick="changeStatusGeneral('toggle_{{$num}}', {{$row -> id}}, {{($row -> status == 1) ? 0 : 1}}, '{{route('panel.eros.establecimiento.status')}}')"></label>
+                                                </div>
+                                                {{-- @can(PermissionKey::Portafolio['permissions']['status']['name'])
                                                 @elsecan(PermissionKey::Portafolio['permissions']['index']['name'])
                                                     <div class="wp">
                                                         <input class="tgl tgl-light chkbx-toggle" type="checkbox" disabled/>
                                                         <label class="tgl-btn toggle_{{$num}}" for="toggle_{{$num}}"></label>
                                                     </div>
-                                                @endcan
+                                                @endcan --}}
                                             </td>
                                             <td class="text-center">
-                                                @can(PermissionKey::Portafolio['permissions']['edit']['name'])
-                                                    <a href="{{route('panel.portafolio.edit', ["id" => $row -> id])}}" class="btn btn-info btn-sm"><i class="fas fa-edit mr-2"></i> Editar</a>
-                                                @endcan
-                                                @can(PermissionKey::Portafolio['permissions']['destroy']['name'])
-                                                    <form action="{{route('panel.portafolio.destroy', ["id" => $row -> id])}}" method="post" class="d-inline delete-form-{{$row -> id}}">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="button" onclick="deleteSubmitForm({{$row -> id}})" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
-                                                    </form>
-                                                @endcan
+                                                <a href="{{route('panel.eros.establecimientos.edit', ["id" => $row -> id])}}" class="btn btn-info btn-sm"><i class="fas fa-edit mr-2"></i> Editar</a>
+                                                {{-- @can(PermissionKey::Portafolio['permissions']['edit']['name'])
+                                                @endcan --}}
+                                                <form action="{{route('panel.eros.establecimientos.destroy', ["id" => $row -> id])}}" method="post" class="d-inline delete-form-{{$row -> id}}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" onclick="deleteSubmitForm({{$row -> id}})" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                                </form>
+                                                {{-- @can(PermissionKey::Portafolio['permissions']['destroy']['name'])
+                                                @endcan --}}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -105,7 +105,7 @@
         alertify.set('notifier','position', 'top-right');
 
         function cambiar_status(el, id, status){
-            axios.post(PATH + 'admin/portafolio/change/status', {
+            axios.post(PATH + 'admin/eros/establecimientos/change/status', {
                 id: id,
                 status: status
             })

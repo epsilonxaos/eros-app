@@ -79,37 +79,16 @@ Route::prefix('/admin')->group(function(){
             Route::post('/update', 'EstablecimientoCategoriasController@update') -> name('panel.eros.categorias.update');
             Route::delete('/destroy/{id}', 'EstablecimientoCategoriasController@destroy') -> name('panel.eros.categorias.destroy');
         });
-    });
 
-    Route::prefix('/establecimientos') -> middleware('auth:admin') -> group(function(){
-        
-
-        Route::get('/', 'PortafolioController@index') -> name('panel.portafolio.index');
-        Route::get('/create', 'PortafolioController@create') -> name('panel.portafolio.create');
-        Route::put('/create/store', 'PortafolioController@store') -> name('panel.portafolio.store');
-        Route::get('/edit/{id}', 'PortafolioController@edit') -> name('panel.portafolio.edit');
-        Route::post('/edit/{id}/update', 'PortafolioController@update') -> name('panel.portafolio.update');
-        Route::delete('/destroy/{id}', 'PortafolioController@destroy') -> name('panel.portafolio.destroy');
-        Route::post('/change/status', 'PortafolioController@changeStatus') -> name('panel.portafolio.status');
-        Route::post('/ordenamiento/galeria', 'PortafolioController@ordenamiento') -> name('panel.portafolio.ordenamiento');
-        Route::post('/destroy/galeria', 'PortafolioController@destroyImageGallery') -> name('panel.portafolio.destroy.galeria');
-    });
-
-    //Noticias
-    Route::prefix('/noticias') -> middleware('auth:admin') -> group(function(){
-        Route::prefix('/categorias') -> group(function () {
-            Route::get('/', 'NoticiasCategoriasController@index') -> name('panel.noticias.categorias.index');
-            Route::put('/add', 'NoticiasCategoriasController@store') -> name('panel.noticias.categorias.store');
-            Route::post('/update', 'NoticiasCategoriasController@update') -> name('panel.noticias.categorias.update');
-            Route::delete('/destroy/{id}', 'NoticiasCategoriasController@destroy') -> name('panel.noticias.categorias.destroy');
+        //Productos
+        Route::prefix('/productos') -> group(function () {
+            Route::get('/', 'ProductosController@index') -> name('panel.eros.productos.index');
+            Route::get('/create', 'ProductosController@create') -> name('panel.eros.productos.create');
+            Route::put('/create/store', 'ProductosController@store') -> name('panel.eros.productos.store');
+            Route::get('/edit/{id}', 'ProductosController@edit') -> name('panel.eros.productos.edit');
+            Route::post('/edit/{id}/update', 'ProductosController@update') -> name('panel.eros.productos.update');
+            Route::delete('/destroy/{id}', 'ProductosController@destroy') -> name('panel.eros.productos.destroy');
+            // Route::post('/change/status', 'ProductosController@changeStatus') -> name('panel.eros.productos.status');
         });
-
-        Route::get('/', 'NoticiasController@index') -> name('panel.noticias.index');
-        Route::get('/create', 'NoticiasController@create') -> name('panel.noticias.create');
-        Route::put('/create/store', 'NoticiasController@store') -> name('panel.noticias.store');
-        Route::get('/edit/{id}', 'NoticiasController@edit') -> name('panel.noticias.edit');
-        Route::post('/edit/{id}/update', 'NoticiasController@update') -> name('panel.noticias.update');
-        Route::delete('/destroy/{id}', 'NoticiasController@destroy') -> name('panel.noticias.destroy');
-        Route::post('/change/status', 'NoticiasController@changeStatus') -> name('panel.noticias.status');
     });
 });
