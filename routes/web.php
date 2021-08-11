@@ -73,12 +73,12 @@ Route::prefix('/admin')->group(function(){
         });
 
         // Categorias
-        // Route::prefix('/categorias') -> group(function () {
-        //     Route::get('/', 'PortafolioCategoriasController@index') -> name('panel.portafolio.categorias.index');
-        //     Route::put('/add', 'PortafolioCategoriasController@store') -> name('panel.portafolio.categorias.store');
-        //     Route::post('/update', 'PortafolioCategoriasController@update') -> name('panel.portafolio.categorias.update');
-        //     Route::delete('/destroy/{id}', 'PortafolioCategoriasController@destroy') -> name('panel.portafolio.categorias.destroy');
-        // });
+        Route::prefix('/categorias') -> group(function () {
+            Route::get('/', 'EstablecimientoCategoriasController@index') -> name('panel.eros.categorias.index');
+            Route::put('/add', 'EstablecimientoCategoriasController@store') -> name('panel.eros.categorias.store');
+            Route::post('/update', 'EstablecimientoCategoriasController@update') -> name('panel.eros.categorias.update');
+            Route::delete('/destroy/{id}', 'EstablecimientoCategoriasController@destroy') -> name('panel.eros.categorias.destroy');
+        });
     });
 
     Route::prefix('/establecimientos') -> middleware('auth:admin') -> group(function(){

@@ -21,8 +21,8 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">
-						<i class="ni ni-single-02 text-default"></i>
+					<a class="nav-link {{request() -> is('admin/eros/categorias*') ? 'active' : '' }}" href="{{route('panel.eros.categorias.index')}}">
+						<i class="ni ni-bullet-list-67 text-default"></i>
 						<span class="nav-link-text">Categorias</span>
 					</a>
 				</li>
