@@ -10,7 +10,7 @@
             <div class="col">
                 <form action="{{route('panel.eros.productos.update', ['id' => $data -> id])}}" method="POST" enctype="multipart/form-data" class="form-submit-alert-wait">
                     @csrf
-                    <input type="hidden" name="tipo" value="producto">
+                    <input type="hidden" name="tipo" value="habitacion">
                     <div class="card">
                         <div class="card-header">
                             <div class="row align-items-center">

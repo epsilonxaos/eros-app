@@ -27,7 +27,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">
+					<a class="nav-link {{request() -> is('admin/eros/habitaciones*') ? 'active' : '' }}" href="{{route('panel.eros.habitaciones.index')}}">
 						<i class="ni ni-single-02 text-default"></i>
 						<span class="nav-link-text">Habitaciones</span>
 					</a>
@@ -36,6 +36,12 @@
 					<a class="nav-link {{request() -> is('admin/eros/productos*') ? 'active' : '' }}" href="{{route('panel.eros.productos.index')}}">
 						<i class="ni ni-cart text-default"></i>
 						<span class="nav-link-text">Productos</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link {{request() -> is('admin/eros/amenidades*') ? 'active' : '' }}" href="{{route('panel.eros.amenidades.index')}}">
+						<i class="ni ni-cart text-default"></i>
+						<span class="nav-link-text">Amenidades</span>
 					</a>
 				</li>
 			</ul>

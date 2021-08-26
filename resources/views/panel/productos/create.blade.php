@@ -8,7 +8,8 @@
     <div class="container-fluid mt--6">
         <div class="row">
             <div class="col">
-                <form action="{{route('panel.eros.establecimientos.store')}}" method="POST" enctype="multipart/form-data" class="form-submit-alert-wait">
+                <form action="{{route('panel.eros.productos.store')}}" method="POST" enctype="multipart/form-data" class="form-submit-alert-wait">
+                    <input type="hidden" name="tipo" value="producto">
                     @csrf
                     @method('PUT')
                     <div class="card">
@@ -45,27 +46,37 @@
                                     </div>
                                     <div class="col-12 col-lg-6 mb-4">
                                         <div class="form-group">
-                                            <label for="categoria_id">Categoria <span class="text-danger">*</span></label>
-                                            <select class="form-control" name="categoria_id">
+                                            <label for="categorias_id">Categoria <span class="text-danger">*</span></label>
+                                            <select class="form-control" name="categorias_id">
                                                 <option value="">Seleccione una opción</option>
                                                 @foreach ($categorias as $item)
-                                                    <option {{old('categoria_id') == $item -> id ? 'selected' : ''}} value="{{$item -> id}}">{{$item -> titulo}}</option>
+                                                    <option {{old('categoria_id') == $item -> id ? 'selected' : ''}} value="{{$item -> id}}">{{$item -> nombre}}</option>
                                                 @endforeach
                                             </select>
-                                            @if($errors -> has('categoria_id'))
-                                                <small class="text-danger pt-1">{{ $errors -> first('categoria_id') }}</small>
+                                            @if($errors -> has('categorias_id'))
+                                                <small class="text-danger pt-1">{{ $errors -> first('categorias_id') }}</small>
                                             @endif
                                         </div>
+                                    </div>
+                                    <div class="col-12 mb-4 pb-3">
+                                        <label for="establecimiento">Establecimientos <span class="text-danger">*</span></label>
+                                        <br>
+                                        @foreach ($establecimiento as $key => $item)
+                                            <div class="custom-control custom-checkbox custom-control-inline">
+                                                <input type="checkbox" class="custom-control-input" id="establecimiento-{{$key}}" name="establecimiento[]" value="{{$item -> id}}">
+                                                <label class="custom-control-label" for="establecimiento-{{$key}}">{{$item -> nombre}}</label>
+                                            </div>
+                                        @endforeach
                                     </div>
                                     <div class="col-12 mb-4">
                                         <label for="">Descripción</label>
                                         <small class="pb-2 d-block">Recomendamos siempre que al copiar y pegar información desde algun sitio o archivo <b>eliminar el formato</b> de los textos para un optimo funcionamiento, esto se puede realizar desde el mismo editor de texto presionando el siguiente botón <img src="{{asset('panel/img/clear-format.png')}}" alt="Clear format"></small>
-                                        <textarea name="contenido" class="trumbowyg-panel" cols="30" rows="10"></textarea>
+                                        <textarea name="descripcion" class="trumbowyg-panel" cols="30" rows="10"></textarea>
                                     </div>
                                     <div class="col-12">
                                         <label for="">Información extra</label>
                                         <small class="pb-2 d-block">Recomendamos siempre que al copiar y pegar información desde algun sitio o archivo <b>eliminar el formato</b> de los textos para un optimo funcionamiento, esto se puede realizar desde el mismo editor de texto presionando el siguiente botón <img src="{{asset('panel/img/clear-format.png')}}" alt="Clear format"></small>
-                                        <textarea name="contenido" class="trumbowyg-panel" cols="30" rows="10"></textarea>
+                                        <textarea name="descripcion_extra" class="trumbowyg-panel" cols="30" rows="10"></textarea>
                                     </div>
                                 </div>
                             </div>

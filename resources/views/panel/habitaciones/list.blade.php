@@ -28,7 +28,7 @@
                                 <h3 class="mb-0 mr-4">Listado de registros</h3>
                             </div>
                             <div class="col-12 col-sm-6 text-center text-sm-right">
-                                <a href="{{route('panel.eros.productos.create')}}" class="btn btn-success pt-2 pb-2"><i class="fas fa-plus mr-2"></i> Agregar</a>
+                                <a href="{{route('panel.eros.habitaciones.create')}}" class="btn btn-success pt-2 pb-2"><i class="fas fa-plus mr-2"></i> Agregar</a>
                                 {{-- @can(PermissionKey::Portafolio['permissions']['create']['name'])
                                 @endcan --}}
                             </div>
@@ -36,7 +36,7 @@
 					</div>
                     <!-- Light table -->
 					<div class="table-responsive pb-3">
-						<table class="table align-items-center table-flush" id="dataTable">
+						<table class="table align-items-center table-flush" id="dataTable" data-order="[[2, 'desc']]">
 							<thead class="thead-light">
 								<tr>
 									{{-- <th scope="col" class="no-sort" data-sort="portada" width="200px">Cover</th> --}}
@@ -77,7 +77,7 @@
                                                 @endcan --}}
                                             </td>
                                             <td class="text-center">
-                                                <a href="{{route('panel.eros.productos.edit', ["id" => $row -> id])}}" class="btn btn-info btn-sm"><i class="fas fa-edit mr-2"></i> Editar</a>
+                                                <a href="{{route('panel.eros.habitaciones.edit', ["id" => $row -> id])}}" class="btn btn-info btn-sm"><i class="fas fa-edit mr-2"></i> Editar</a>
                                                 {{-- @can(PermissionKey::Portafolio['permissions']['edit']['name'])
                                                 @endcan --}}
                                                 <form action="{{route('panel.eros.productos.destroy', ["id" => $row -> id])}}" method="post" class="d-inline delete-form-{{$row -> id}}">

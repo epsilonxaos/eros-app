@@ -88,7 +88,26 @@ Route::prefix('/admin')->group(function(){
             Route::get('/edit/{id}', 'ProductosController@edit') -> name('panel.eros.productos.edit');
             Route::post('/edit/{id}/update', 'ProductosController@update') -> name('panel.eros.productos.update');
             Route::delete('/destroy/{id}', 'ProductosController@destroy') -> name('panel.eros.productos.destroy');
-            // Route::post('/change/status', 'ProductosController@changeStatus') -> name('panel.eros.productos.status');
+            Route::post('/change/status', 'ProductosController@changeStatus') -> name('panel.eros.productos.status');
+        });
+
+        //Habitaciones
+        Route::prefix('/habitaciones') -> group(function () {
+            Route::get('/', 'ProductosController@indexHabitaciones') -> name('panel.eros.habitaciones.index');
+            Route::get('/create', 'ProductosController@createHabitaciones') -> name('panel.eros.habitaciones.create');
+            // Route::put('/create/store', 'ProductosController@store') -> name('panel.eros.habitaciones.store');
+            Route::get('/edit/{id}', 'ProductosController@editHabitaciones') -> name('panel.eros.habitaciones.edit');
+            // Route::post('/edit/{id}/update', 'ProductosController@update') -> name('panel.eros.habitaciones.update');
+            // Route::delete('/destroy/{id}', 'ProductosController@destroy') -> name('panel.eros.habitaciones.destroy');
+            // Route::post('/change/status', 'ProductosController@changeStatus') -> name('panel.eros.habitaciones.status');
+        });
+
+        // Amenidades
+        Route::prefix('/amenidades') -> group(function () {
+            Route::get('/', 'AmenidadesController@index') -> name('panel.eros.amenidades.index');
+            Route::put('/add', 'AmenidadesController@store') -> name('panel.eros.amenidades.store');
+            Route::post('/update', 'AmenidadesController@update') -> name('panel.eros.amenidades.update');
+            Route::delete('/destroy/{id}', 'AmenidadesController@destroy') -> name('panel.eros.amenidades.destroy');
         });
     });
 });
