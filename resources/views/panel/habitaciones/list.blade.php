@@ -36,7 +36,7 @@
 					</div>
                     <!-- Light table -->
 					<div class="table-responsive pb-3">
-						<table class="table align-items-center table-flush" id="dataTable" data-order="[[2, 'desc']]">
+						<table class="table align-items-center table-flush" id="dataTable" >
 							<thead class="thead-light">
 								<tr>
 									{{-- <th scope="col" class="no-sort" data-sort="portada" width="200px">Cover</th> --}}
@@ -78,6 +78,7 @@
                                             </td>
                                             <td class="text-center">
                                                 <a href="{{route('panel.eros.habitaciones.edit', ["id" => $row -> id])}}" class="btn btn-info btn-sm"><i class="fas fa-edit mr-2"></i> Editar</a>
+                                                <a href="{{route('panel.eros.habitaciones.galeria.acciones', ['accion' => 'edit', 'id' => $row -> id])}}" class="btn btn-primary btn-sm"><i class="fas fa-edit mr-2"></i> Galeria</a>
                                                 {{-- @can(PermissionKey::Portafolio['permissions']['edit']['name'])
                                                 @endcan --}}
                                                 <form action="{{route('panel.eros.productos.destroy', ["id" => $row -> id])}}" method="post" class="d-inline delete-form-{{$row -> id}}">

@@ -68134,11 +68134,11 @@ __webpack_require__(/*! ./Trumbowyg */ "./resources/js/panel/scripts/Trumbowyg/i
 
 __webpack_require__(/*! ./tags-input */ "./resources/js/panel/scripts/tags-input/index.js");
 
-__webpack_require__(/*! ./sortable */ "./resources/js/panel/scripts/sortable/index.js");
+__webpack_require__(/*! ./sortable */ "./resources/js/panel/scripts/sortable/index.js"); // require('./fine-uploader');
 
 
 
- // import './dropzone';
+
 
 
 

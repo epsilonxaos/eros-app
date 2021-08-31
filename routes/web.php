@@ -89,17 +89,26 @@ Route::prefix('/admin')->group(function(){
             Route::post('/edit/{id}/update', 'ProductosController@update') -> name('panel.eros.productos.update');
             Route::delete('/destroy/{id}', 'ProductosController@destroy') -> name('panel.eros.productos.destroy');
             Route::post('/change/status', 'ProductosController@changeStatus') -> name('panel.eros.productos.status');
+
+            // Galeria
+            Route::prefix('/galeria') -> middleware('auth:admin') -> group(function(){
+                Route::get('/{accion}/{id}', 'ProductosController@createGaleria') -> name('panel.eros.productos.galeria.acciones');
+                Route::post('/add', 'ProductosController@storeGaleria') -> name('panel.eros.productos.galeria.store');
+                Route::post('/ordenamiento', 'ProductosController@ordenamiento') -> name('panel.eros.productos.galeria.ordenamiento');
+                Route::post('/destroy', 'ProductosController@destroyImageGallery') -> name('panel.eros.productos.galeria.destroy');
+            });
         });
 
         //Habitaciones
         Route::prefix('/habitaciones') -> group(function () {
             Route::get('/', 'ProductosController@indexHabitaciones') -> name('panel.eros.habitaciones.index');
             Route::get('/create', 'ProductosController@createHabitaciones') -> name('panel.eros.habitaciones.create');
-            // Route::put('/create/store', 'ProductosController@store') -> name('panel.eros.habitaciones.store');
             Route::get('/edit/{id}', 'ProductosController@editHabitaciones') -> name('panel.eros.habitaciones.edit');
-            // Route::post('/edit/{id}/update', 'ProductosController@update') -> name('panel.eros.habitaciones.update');
-            // Route::delete('/destroy/{id}', 'ProductosController@destroy') -> name('panel.eros.habitaciones.destroy');
-            // Route::post('/change/status', 'ProductosController@changeStatus') -> name('panel.eros.habitaciones.status');
+
+            // Galeria
+            Route::prefix('/galeria') -> middleware('auth:admin') -> group(function(){
+                Route::get('/{accion}/{id}', 'ProductosController@createGaleria2') -> name('panel.eros.habitaciones.galeria.acciones');
+            });
         });
 
         // Amenidades

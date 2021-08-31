@@ -9,13 +9,17 @@ use App\Http\Requests\StoreProductos;
 use App\Http\Requests\UpdateProductos;
 use App\ProductoAmenidad;
 use App\ProductoEstablecimiento;
+use App\ProductoGaleria;
 use App\Productos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Console\Helper\Helper;
 
 class ProductosController extends Controller
 {
     protected $directorio = "public/productos";
+    protected $directorioGalerias = "public/productos/galeria";
 
     /**
      * Display a listing of the resource.
@@ -147,6 +151,8 @@ class ProductosController extends Controller
             }
         }
 
+        $message = ($request -> tipo === 'habitacion') ? 'Habitacion creada correctamente!' : 'Producto creado correctamente!';
+
         if($request -> tipo === 'habitacion') {
             $add -> tipo = 'habitacion';
             $add -> save();
@@ -158,9 +164,152 @@ class ProductosController extends Controller
             //         $add3 -> amenidades_id = $amenidad_id;
             //     }
             // }
+            return redirect() -> route('panel.eros.habitaciones.galeria.acciones', ['accion' => 'create', 'id' => $add -> id]) -> with('success', $message);
         }
-        $message = ($request -> tipo === 'habitacion') ? 'Habitacion creada correctamente!' : 'Producto creado correctamente!';
-        return redirect() -> back() -> with('success', $message);
+        return redirect() -> route('panel.eros.productos.galeria.acciones', ['accion' => 'create', 'id' => $add -> id]) -> with('success', $message);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createGaleria(String $accion, Int $id)
+    {
+        if($accion === 'edit')
+        {
+            $nameProduct = Productos::select('nombre') -> where('id', $id) -> first();
+        }
+
+        $info = [
+            'title' => 'Galeria',
+            'breadcrumb' => [
+                [
+                    'title' => 'Todos',
+                    'route' => 'panel.eros.productos.index',
+                    'active' => false
+                ],
+                [
+                    'title' => ($accion === 'edit') ? 'Editar - '.$nameProduct -> nombre : 'Nuevo',
+                    'route' => ($accion === 'edit') ? 'panel.eros.productos.edit' : 'panel.eros.productos.create',
+                    'active' => false,
+                    'params' => ($accion === 'edit') ? ['id' => $id] : ''
+                ],
+                [
+                    'title' => 'Galeria',
+                    'route' => 'panel.eros.productos.galeria.acciones',
+                    'active' => true,
+                    'params' => [
+                        'accion' => $accion,
+                        'id' => $id
+                    ]
+                ]
+            ],
+            'galeria' => ProductoGaleria::where('producto_id', $id) -> orderBy('order', 'asc') -> get(),
+            'id' => $id,
+            'accion' => $accion
+        ];
+        return view('panel.productos.galeria.index', $info);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createGaleria2(String $accion, Int $id)
+    {
+        if($accion === 'edit')
+        {
+            $nameProduct = Productos::select('nombre') -> where('id', $id) -> first();
+        }
+
+        $info = [
+            'title' => 'Galeria',
+            'breadcrumb' => [
+                [
+                    'title' => 'Todos',
+                    'route' => 'panel.eros.habitaciones.index',
+                    'active' => false
+                ],
+                [
+                    'title' => ($accion === 'edit') ? 'Editar - '.$nameProduct -> nombre : 'Nuevo',
+                    'route' => ($accion === 'edit') ? 'panel.eros.habitaciones.edit' : 'panel.eros.habitaciones.create',
+                    'active' => false,
+                    'params' => ($accion === 'edit') ? ['id' => $id] : ''
+                ],
+                [
+                    'title' => 'Galeria',
+                    'route' => 'panel.eros.habitaciones.galeria.acciones',
+                    'active' => true,
+                    'params' => [
+                        'accion' => $accion,
+                        'id' => $id
+                    ]
+                ]
+            ],
+            'galeria' => ProductoGaleria::where('producto_id', $id) -> orderBy('order', 'asc') -> get(),
+            'id' => $id,
+            'accion' => $accion
+        ];
+        return view('panel.habitaciones.galeria.index', $info);
+    }
+
+    public function storeGaleria(Request $request) {
+        $input = $request -> all();
+        $rules = [
+            'file' => 'mimes:jpeg,jpg,png|max:2048'
+        ];
+
+        $validation = Validator::make($input, $rules);
+
+        if($validation -> fails())
+        {
+            return Response::json('Limite de peso excedido', 400);
+        }
+
+        $file = $request -> file('file');
+        $cover = Helpers::addFileStorage($file, $this -> directorioGalerias);
+        $add = new ProductoGaleria();
+        $add -> img = $cover;
+        $add -> producto_id = $request -> id;
+        $add -> save();
+        $add -> order = $add -> id;
+        $add -> save();
+
+        return Response::json('success', 200);
+    }
+
+    /**
+     * Reording files gallery
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function ordenamiento(Request $request)
+    {
+        $orden = $request -> toArray();
+        foreach ($orden as $key => $val) {
+            $gal = ProductoGaleria::find($val['id']);
+            $gal -> order = $val['orden'];
+            $gal -> save();
+        }
+
+        return 'true';
+    }
+
+    /**
+     * Delete image gallery
+     *
+     * @param \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyImageGallery(Request $request)
+    {
+        Helpers::deleteFileStorage('producto_galerias', 'img', $request -> id);
+        ProductoGaleria::where('id', $request -> id) -> delete();
+
+        return 'true';
     }
 
     /**
@@ -184,9 +333,15 @@ class ProductosController extends Controller
     {
         $data = Productos::find($id);
         $categorias = EstablecimientoCategorias::where('status', 1) -> get();
-        $establecimiento = Establecimiento::select('establecimientos.*', 'producto_establecimiento.establecimiento_id AS activo')
-            ->leftJoin('producto_establecimiento', 'establecimientos.id', '=', 'producto_establecimiento.establecimiento_id')
-            ->where('establecimientos.status', 1) -> get();
+        $establecimiento = Establecimiento::where('status', '1') -> get() -> toArray();
+        foreach ($establecimiento as $key => $local) {
+            $activo = ProductoEstablecimiento::where([
+                ['producto_id', '=', $id],
+                ['establecimiento_id', '=', $local['id']]
+            ]) -> get() -> toArray();
+
+            $establecimiento[$key]['activo'] = (count($activo) > 0) ? true : false;
+        }
 
         return view('panel.productos.edit', [
             'title' => 'Productos',
@@ -221,13 +376,15 @@ class ProductosController extends Controller
     {
         $data = Productos::find($id);
         $categorias = EstablecimientoCategorias::where('status', 1) -> get();
-        $establecimiento = Establecimiento::select('establecimientos.*', 'producto_establecimiento.establecimiento_id AS activo', 'producto_establecimiento.producto_id AS prod')
-            ->join('producto_establecimiento', 'establecimientos.id', '=', 'producto_establecimiento.establecimiento_id')
-            ->where([
-                ['establecimientos.status', '=', 1]
-            ])  -> get();
+        $establecimiento = Establecimiento::where('status', '1') -> get() -> toArray();
+        foreach ($establecimiento as $key => $local) {
+            $activo = ProductoEstablecimiento::where([
+                ['producto_id', '=', $id],
+                ['establecimiento_id', '=', $local['id']]
+            ]) -> get() -> toArray();
 
-            dd($establecimiento -> toArray());
+            $establecimiento[$key]['activo'] = (count($activo) > 0) ? true : false;
+        }
 
         return view('panel.habitaciones.edit', [
             'title' => 'Habitaciones',

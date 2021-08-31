@@ -78,6 +78,7 @@
                                             </td>
                                             <td class="text-center">
                                                 <a href="{{route('panel.eros.productos.edit', ["id" => $row -> id])}}" class="btn btn-info btn-sm"><i class="fas fa-edit mr-2"></i> Editar</a>
+                                                <a href="{{route('panel.eros.productos.galeria.acciones', ['accion' => 'edit', 'id' => $row -> id])}}" class="btn btn-primary btn-sm"><i class="fas fa-edit mr-2"></i> Galeria</a>
                                                 {{-- @can(PermissionKey::Portafolio['permissions']['edit']['name'])
                                                 @endcan --}}
                                                 <form action="{{route('panel.eros.productos.destroy', ["id" => $row -> id])}}" method="post" class="d-inline delete-form-{{$row -> id}}">

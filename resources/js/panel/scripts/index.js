@@ -4,10 +4,10 @@ require('./dataTable');
 require('./Trumbowyg');
 require('./tags-input');
 require('./sortable');
+// require('./fine-uploader');
 
 import './validation';
 import './delete-button';
 import './update-status';
-// import './dropzone';
 
 import './file-upload-with-preview';

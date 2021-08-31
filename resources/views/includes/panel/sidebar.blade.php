@@ -16,7 +16,7 @@
 			<ul class="navbar-nav">
 				<li class="nav-item">
 					<a class="nav-link {{request() -> is('admin/eros/establecimientos*') ? 'active' : '' }}" href="{{route('panel.eros.establecimientos.index')}}">
-						<i class="ni ni-building text-default"></i>
+						<i class="fas fa-hotel text-default"></i>
 						<span class="nav-link-text">Establecimientos</span>
 					</a>
 				</li>
@@ -28,7 +28,7 @@
 				</li>
 				<li class="nav-item">
 					<a class="nav-link {{request() -> is('admin/eros/habitaciones*') ? 'active' : '' }}" href="{{route('panel.eros.habitaciones.index')}}">
-						<i class="ni ni-single-02 text-default"></i>
+						<i class="fas fa-bed text-default"></i>
 						<span class="nav-link-text">Habitaciones</span>
 					</a>
 				</li>
@@ -40,7 +40,7 @@
 				</li>
 				<li class="nav-item">
 					<a class="nav-link {{request() -> is('admin/eros/amenidades*') ? 'active' : '' }}" href="{{route('panel.eros.amenidades.index')}}">
-						<i class="ni ni-cart text-default"></i>
+						<i class="fas fa-tasks text-default"></i>
 						<span class="nav-link-text">Amenidades</span>
 					</a>
 				</li>

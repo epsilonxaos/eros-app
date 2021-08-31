@@ -65,8 +65,8 @@
                                         <br>
                                         @foreach ($establecimiento as $key => $item)
                                             <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input type="checkbox" class="custom-control-input" id="establecimiento-{{$key}}" name="establecimiento[]" value="{{$item -> id}}" {{$item -> activo === $item -> id ? 'checked' : ''}}>
-                                                <label class="custom-control-label" for="establecimiento-{{$key}}">{{$item -> nombre}}</label>
+                                                <input type="checkbox" class="custom-control-input" id="establecimiento-{{$key}}" name="establecimiento[]" value="{{$item['id']}}" {{$item['activo'] ? 'checked' : ''}}>
+                                                <label class="custom-control-label" for="establecimiento-{{$key}}">{{$item['nombre']}}</label>
                                             </div>
                                         @endforeach
                                     </div>
