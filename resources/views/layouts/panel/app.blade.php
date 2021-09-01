@@ -35,6 +35,67 @@
             font-size: 12px;
         }
     </style>
+    <style>
+        .chtg {
+            position: relative;
+            z-index: 1;
+        }
+        .chtg input[type=checkbox],
+        .chtg input[type=radio] {
+        position: absolute;
+        opacity: 0;
+        z-index: -1;
+        }
+
+        .chtg label {
+            position: relative;
+            margin-right: 1em;
+            padding-left: 2em;
+            padding-right: 1em;
+            line-height: 2;
+            cursor: pointer;
+            color: #525f7f;
+            font-size: 14px;
+        }
+        .chtg label:before {
+        box-sizing: border-box;
+        content: " ";
+        position: absolute;
+        top: 0.3em;
+        left: 0;
+        display: block;
+        width: 1.4em;
+        height: 1.4em;
+        border: 1px solid #adb6ca;
+        border-radius: 0.25em;
+        z-index: -1;
+        }
+
+        .chtg input[type=radio] + label::before {
+        border-radius: 1em;
+        }
+
+        /* Checked */
+        .chtg input[type=checkbox]:checked + label,
+        .chtg input[type=radio]:checked + label {
+        padding-left: 1em;
+        color: #fff;
+        }
+        .chtg input[type=checkbox]:checked + label:before,
+        .chtg input[type=radio]:checked + label:before {
+        top: 0;
+        width: 100%;
+        height: 2em;
+        background: #172b4d;
+        border-color: #172b4d;
+        }
+
+        /* Transition */
+        .chtg label,
+        .chtg label::before {
+        transition: 0.25s all ease;
+        }
+    </style>
     {{-- <link rel="stylesheet" href="{{asset('css/panel.css')}}"> --}}
     <style>
         .alertify-notifier.ajs-right .ajs-message.ajs-visible {

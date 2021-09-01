@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Amenidades;
 use App\Establecimiento;
 use App\EstablecimientoCategorias;
 use App\Helpers;
@@ -120,7 +121,8 @@ class ProductosController extends Controller
                 ]
             ],
             'categorias' => $categorias,
-            'establecimiento' => $establecimiento
+            'establecimiento' => $establecimiento,
+            'amenidades' => Amenidades::all()
         ]);
     }
 
@@ -132,6 +134,7 @@ class ProductosController extends Controller
      */
     public function store(StoreProductos $request)
     {
+        // dd($request -> all());
         $add = new Productos();
         $cover = Helpers::addFileStorage($request -> file('cover'), $this -> directorio);
 
@@ -142,7 +145,7 @@ class ProductosController extends Controller
         $add -> descripcion_extra = $request -> descripcion_extra;
         $add -> save();
 
-        if(count($request -> establecimiento) > 0) {
+        if(isset($request -> establecimiento)) {
             foreach ($request -> establecimiento as $key => $establecimiento_id) {
                 $add2 = new ProductoEstablecimiento();
                 $add2 -> producto_id = $add -> id;
@@ -157,13 +160,14 @@ class ProductosController extends Controller
             $add -> tipo = 'habitacion';
             $add -> save();
 
-            // if(count($request -> amenidades) > 0) {
-            //     foreach ($request -> amenidades as $key => $amenidad_id) {
-            //         $add3 = new ProductoAmenidad();
-            //         $add3 -> producto_id = $add -> id;
-            //         $add3 -> amenidades_id = $amenidad_id;
-            //     }
-            // }
+            if(isset($request -> amenidades)) {
+                foreach ($request -> amenidades as $key => $amenidad_id) {
+                    $add3 = new ProductoAmenidad();
+                    $add3 -> producto_id = $add -> id;
+                    $add3 -> amenidades_id = $amenidad_id;
+                    $add3 -> save();
+                }
+            }
             return redirect() -> route('panel.eros.habitaciones.galeria.acciones', ['accion' => 'create', 'id' => $add -> id]) -> with('success', $message);
         }
         return redirect() -> route('panel.eros.productos.galeria.acciones', ['accion' => 'create', 'id' => $add -> id]) -> with('success', $message);
@@ -385,6 +389,15 @@ class ProductosController extends Controller
 
             $establecimiento[$key]['activo'] = (count($activo) > 0) ? true : false;
         }
+        $amenidades = Amenidades::where('status', '1') -> get() -> toArray();
+        foreach ($amenidades as $key => $amenidad) {
+            $activo = ProductoAmenidad::where([
+                ['producto_id', '=', $id],
+                ['amenidades_id', '=', $amenidad['id']]
+            ]) -> get() -> toArray();
+
+            $amenidades[$key]['activo'] = (count($activo) > 0) ? true : false;
+        }
 
         return view('panel.habitaciones.edit', [
             'title' => 'Habitaciones',
@@ -405,7 +418,8 @@ class ProductosController extends Controller
             ],
             'data' => $data,
             'categorias' => $categorias,
-            'establecimiento' => $establecimiento
+            'establecimiento' => $establecimiento,
+            'amenidades' => $amenidades
         ]);
     }
 
@@ -443,14 +457,15 @@ class ProductosController extends Controller
         }
 
         if($request -> tipo === 'habitacion') {
-            // if(count($request -> amenidades) > 0) {
-                // ProductoAmenidad::where('producto_id', $id) -> delete();
-                // foreach ($request -> amenidades as $key => $amenidad_id) {
-                //     $add3 = new ProductoAmenidad();
-                //     $add3 -> producto_id = $upd -> id;
-                //     $add3 -> amenidades_id = $amenidad_id;
-                // }
-            // }
+            if(isset($request -> amenidades)) {
+                ProductoAmenidad::where('producto_id', $id) -> delete();
+                foreach ($request -> amenidades as $key => $amenidad_id) {
+                    $add3 = new ProductoAmenidad();
+                    $add3 -> producto_id = $upd -> id;
+                    $add3 -> amenidades_id = $amenidad_id;
+                    $add3 -> save();
+                }
+            }
         }
         $message = ($request -> tipo === 'habitacion') ? 'Habitacion creada correctamente!' : 'Producto creado correctamente!';
         return redirect() -> back() -> with('success', $message);

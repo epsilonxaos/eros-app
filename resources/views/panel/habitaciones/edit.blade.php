@@ -64,9 +64,19 @@
                                         <label for="establecimiento">Establecimientos <span class="text-danger">*</span></label>
                                         <br>
                                         @foreach ($establecimiento as $key => $item)
-                                            <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input type="checkbox" class="custom-control-input" id="establecimiento-{{$key}}" name="establecimiento[]" value="{{$item['id']}}" {{$item['activo'] ? 'checked' : ''}}>
-                                                <label class="custom-control-label" for="establecimiento-{{$key}}">{{$item['nombre']}}</label>
+                                            <div class="chtg custom-control-inline">
+                                                <input type="checkbox" id="establecimiento-{{$key}}" name="establecimiento[]" value="{{$item['id']}}" {{$item['activo'] ? 'checked' : ''}}>
+                                                <label for="establecimiento-{{$key}}">{{$item['nombre']}}</label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="col-12 mb-4 pb-3">
+                                        <label for="amenidades">Amenidades <span class="text-danger">*</span></label>
+                                        <br>
+                                        @foreach ($amenidades as $key => $item)
+                                            <div class="chtg custom-control-inline">
+                                                <input type="checkbox" id="amenidades-{{$key}}" name="amenidades[]" value="{{$item['id']}}" {{$item['activo'] ? 'checked' : ''}}>
+                                                <label for="amenidades-{{$key}}">{{$item['titulo']}}</label>
                                             </div>
                                         @endforeach
                                     </div>
