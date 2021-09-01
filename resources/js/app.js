@@ -6,27 +6,36 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+document.getElementById('btn-menu-movil').addEventListener('click', function(){
+    let sidebar = document.querySelector('.nav-sidebar');
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
-
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-const app = new Vue({
-    el: '#app',
+    this.classList.toggle('active');
+    sidebar.classList.toggle('active');
 });
+
+document.addEventListener("DOMContentLoaded", function(){
+    setTimeout(() => {
+        $('.loading').fadeOut();
+    }, 1500);
+});
+
+if(document.querySelector('.move-animation')){
+    document.querySelectorAll('.move-animation a').forEach(element => {
+        element.addEventListener('click', () => {
+            let id = element.dataset.id;
+            let space = element.dataset.space;
+            let speed = element.dataset.speed;
+
+            console.log(id, space, speed);
+
+            var body = $('html, body');
+            var target = $(id);
+
+            console.log(target);
+
+            body.animate({
+                scrollTop: target.offset().top - space
+            }, speed);
+        });
+    });
+}

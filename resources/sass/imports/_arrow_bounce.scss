@@ -1,0 +1,38 @@
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-30px);
+    }
+
+    60% {
+        transform: translateY(-15px);
+    }
+}
+
+.arrow {
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgEAQAAACJ4248AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAAAGAAAABgAPBrQs8AAAAHdElNRQflCBAPHyFgW2UyAAAAwElEQVRYw+3VOxKDIABFUXpn2BWNBWFx7IOO2orlaKsW3BTJaCxM/ABpeK3OnIsFClFXV/fvgTHgHFGpYmZUCpyDx0PAMADANIHW+Q+s9csC6HtB9J5leSO2OBC9F9A00HVrxDyDMenxtoVxXJ0QiFK+H+aN+IqvL+WJOITnijiFp464hKeKuIXfjUiCX41Iip+NyIIfjciK/4oogi8RUUoIYfvv+Ljbc+L7X6Igvh9REF8iopRgLVhbHK+rq0u5JwV0Z+S57MF4AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIxLTA4LTE2VDE1OjMxOjMzKzAwOjAwj0X/NAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMS0wOC0xNlQxNTozMTozMyswMDowMP4YR4gAAAAASUVORK5CYII=');
+    background-size: contain;
+
+    &.center {
+        right: 50%;
+        transform: translateX(-50%);
+        bottom: 30px;
+    }
+}
+
+.bounce {
+    animation: bounce 3.5s infinite;
+}

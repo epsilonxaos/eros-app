@@ -1,0 +1,35 @@
+.bg {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+
+    &:not(.bg-img-view){
+        img {
+            width: 100%;
+            height: auto;
+            visibility: hidden;
+        }
+    }
+
+
+    &.bg-size-contain {
+        background-size: contain;
+    }
+
+    &.bg-size-auto {
+        background-size: auto;
+    }
+
+    &.bg-size-cover {
+        background-size: cover;
+    }
+
+    &.bg-position-bottom {
+        background-position: center bottom;
+    }
+}
+
+.img-object {
+    object-fit: cover;
+}

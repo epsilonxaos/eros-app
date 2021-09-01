@@ -1,0 +1,3 @@
+<div class="loading align-items-center justify-content-center h-100">
+    Cargando...
+</div>

@@ -1,0 +1,156 @@
+@import '../variables';
+
+.home {
+    &-banner {
+        min-height: 600px;
+        height: 100vh;
+        width: 100%;
+        padding-bottom: 60px;
+
+        &::after {
+            content: "";
+            width: 100%;
+            height: 35px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: $black;
+        }
+
+        .informacion {
+            h1, h3 {
+                color: $white;
+                font-style: italic;
+            }
+
+            h1 {
+                font-weight: 500;
+
+                @media screen and (min-width: 768px){
+                    font-size: 65px;
+                }
+            }
+
+            h3 {
+                font-weight: 300;
+
+                @media screen and (min-width: 768px){
+                    font-size: 40px;
+                }
+            }
+        }
+
+        @import '../imports/video_banner_bg';
+        @import '../imports/arrow_bounce';
+    }
+
+    &-habitaciones {
+        padding: 40px 0;
+
+        .bg {
+            min-height: 400px;
+            height: 100vh;
+            max-height: 350px;
+            border-radius: 10px;
+            position: relative;
+
+            @media screen and (min-width: 768px){
+                max-height: 550px;
+            }
+
+            &::before {
+                content: "";
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-color: rgba($color: $black, $alpha: 0.2);
+            }
+
+            .wp {
+                position: relative;
+                z-index: 2;
+            }
+        }
+
+        h2 {
+            font-size: 40px;
+            font-weight: 500;
+            font-style: italic;
+            line-height: 1;
+            font-size: 65px;
+
+            @media screen and (min-width: 768px){
+            }
+        }
+
+        @media screen and (min-width: 992px){
+            padding: 60px 0;
+        }
+        @media screen and (min-width: 1200px){
+            padding: 100px 0;
+        }
+    }
+
+    &-extras {
+        padding: 40px 0;
+
+        .bg {
+            min-height: 250px;
+            height: 100vh;
+            max-height: 280px;
+            border-radius: 10px;
+            position: relative;
+
+            @media screen and (min-width: 768px){
+                max-height: 330px;
+            }
+
+            &::before {
+                content: "";
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-color: rgba($color: $black, $alpha: 0.2);
+            }
+
+            .wp {
+                position: relative;
+                z-index: 2;
+            }
+        }
+
+        h2 {
+            font-size: 40px;
+            font-weight: 500;
+            font-style: italic;
+            line-height: 1;
+            font-size: 35px;
+
+            @media screen and (min-width: 768px){
+                font-size: 65px;
+            }
+        }
+
+        @media screen and (min-width: 992px){
+            padding: 60px 0;
+        }
+    }
+
+    &-contacto {
+        padding: 40px 0;
+        background-color: $black;
+
+        h4 {
+            font-weight: 200;
+            font-style: italic;
+        }
+
+        @media screen and (min-width: 992px){
+            padding: 60px 0;
+        }
+    }
+}

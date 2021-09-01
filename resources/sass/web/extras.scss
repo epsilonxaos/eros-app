@@ -1,0 +1,122 @@
+@import '../variables';
+@import '../imports/arrow_bounce';
+@import '../imports/menu_white';
+
+.faqs {
+    background-color: $black;
+
+    .primera {
+        min-height: 100vh;
+        padding: 80px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        h1 {
+            $sizef: 30px;
+
+            font-size: $sizef;
+            color: $white;
+            font-weight: bold;
+            line-height: 1;
+
+            @media screen and (min-width: 768px){
+                $sizef: 50px;
+                font-size: $sizef;
+            }
+            @media screen and (min-width: 992px){
+                $sizef: 80px;
+                font-size: $sizef;
+            }
+
+            span {
+                text-transform: lowercase;
+                font-weight: 200;
+                font-size: $sizef - 12px;
+                opacity: .8;
+
+                @media screen and (min-width: 768px){
+                    font-size: $sizef - 12px;
+                }
+                @media screen and (min-width: 992px){
+                    font-size: $sizef - 12px;
+                }
+            }
+            & > span:first-child {
+                text-transform: capitalize;
+            }
+        }
+
+        p {
+            color: $white;
+            font-weight: 600;
+            font-size: 15px;
+        }
+    }
+
+    .preguntas {
+        min-height: 100vh;
+        padding: 80px 0;
+        background-color: $black;
+
+        .card {
+            background-color: $black;
+            border: none;
+            border-radius: 0;
+
+            h2 button {
+                font-size: 20px;
+
+                &[aria-expanded="true"] {
+                    img {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+
+            p {
+                font-weight: 300;
+                font-style: italic;
+            }
+        }
+    }
+}
+
+.politicas-terminos {
+    padding: 80px 0;
+    background-color: $white;
+
+    h1 {
+        $sizef: 30px;
+
+        font-size: $sizef;
+        font-weight: bold;
+        line-height: 1;
+
+        @media screen and (min-width: 768px){
+            $sizef: 50px;
+            font-size: $sizef;
+        }
+        @media screen and (min-width: 992px){
+            $sizef: 80px;
+            font-size: $sizef;
+        }
+
+        span {
+            text-transform: lowercase;
+            font-weight: 200;
+            font-size: $sizef - 12px;
+            opacity: .8;
+
+            @media screen and (min-width: 768px){
+                font-size: $sizef - 12px;
+            }
+            @media screen and (min-width: 992px){
+                font-size: $sizef - 12px;
+            }
+        }
+        & > span:first-child {
+            text-transform: capitalize;
+        }
+    }
+}

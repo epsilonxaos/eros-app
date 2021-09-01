@@ -1,0 +1,199 @@
+@import '../variables';
+@import '~swiper/swiper';
+@import '~swiper/components/navigation/navigation';
+@import '~swiper/components/thumbs/thumbs';
+@import '~swiper/components/effect-fade/effect-fade';
+
+.catalogo {
+    padding: 60px 0;
+    padding-top: 130px;
+
+    .card-result {
+        &.bg {
+            min-height: 200px;
+            height: 100%;
+            border-radius: 10px;
+            position: relative;
+
+            &::before {
+                content: "";
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-color: rgba($color: $black, $alpha: 0.2);
+            }
+
+            .wpc {
+                top: 0;
+                left: 0;
+                padding: 15px;
+            }
+
+            .wp {
+                position: relative;
+                z-index: 2;
+            }
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 500;
+            font-style: italic;
+            line-height: 1;
+
+            @media screen and (min-width: 768px) {
+                font-size: 35px;
+            }
+        }
+    }
+
+    &-detalle {
+        padding: 60px 0;
+        padding-top: 130px;
+
+        .swiper-button-prev, .swiper-button-next {
+            transform: scale(.7);
+        }
+
+        .galeria {
+            .img-object {
+                border-radius: 5px;
+
+                &.slide {
+                    height: 300px;
+                    width: 100%;
+
+                    @media screen and (min-width: 768px) {
+                        height: 450px;
+                    }
+                }
+
+                &.thumbs {
+                    height: 60px;
+                    width: 100%;
+
+                    @media screen and (min-width: 768px) {
+                        height: 80px;
+                    }
+                }
+            }
+
+            .swiper-container {
+                width: 100%;
+                height: 300px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .swiper-slide {
+                background-size: cover;
+                background-position: center;
+            }
+
+            .gallery-top {
+                height: 80%;
+                width: 100%;
+            }
+
+            .gallery-thumbs {
+                height: 20%;
+                box-sizing: border-box;
+                padding: 10px 0;
+            }
+
+            .gallery-thumbs .swiper-slide {
+                width: 25%;
+                height: 100%;
+                opacity: 0.4;
+            }
+
+            .gallery-thumbs .swiper-slide-thumb-active {
+                opacity: 1;
+            }
+        }
+
+        .ptb-section {
+            padding-top: 60px;
+            padding-bottom: 60px;
+
+            @media screen and (min-width: 992px){
+                padding-top: 80px;
+                padding-bottom: 80px;
+            }
+        }
+
+        .tlo {
+            font-style: italic;
+            font-weight: 500;
+            font-size: 45px;
+
+            @media screen and (min-width: 768px){
+                font-size: 60px;
+            }
+            @media screen and (min-width: 1200px){
+                font-size: 70px;
+            }
+        }
+
+        hr {
+            border-color: $white;
+        }
+
+        .letter-x {
+            position: relative;
+
+            & > span {
+                position: absolute;
+                top: -19px;
+                left: 16px;
+                color: crimson;
+                font-size: 65px;
+                opacity: .8;
+
+                @media screen and (min-width: 768px){
+                    top: -21px;
+                    left: 19px;
+                    font-size: 85px
+                }
+                @media screen and (min-width: 1200px){
+                    font-size: 95px;
+                    left: 24px;
+                }
+            }
+        }
+
+        .line-text {
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            &::before {
+                content: "";
+                width: 60px;
+                height: 1px;
+                background-color: $white;
+                display: inline-block;
+                margin-right: 10px;
+            }
+        }
+
+        ul {
+            @media screen and (min-width: 768px){
+                columns: 2;
+            }
+            @media screen and (min-width: 992px){
+                columns: 3;
+            }
+        }
+
+        .extras {
+            .img-object {
+                height: 200px;
+                width: 100%;
+                border-radius: 5px;
+            }
+        }
+    }
+}

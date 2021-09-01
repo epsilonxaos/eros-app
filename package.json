@@ -36,6 +36,7 @@
         "js-cookie": "^2.2.1",
         "sortablejs": "^1.14.0",
         "sweetalert2": "^9.10.12",
-        "trumbowyg": "^2.21.0"
+        "trumbowyg": "^2.21.0",
+        "swiper": "^6.8.1"
     }
 }

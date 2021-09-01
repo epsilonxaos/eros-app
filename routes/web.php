@@ -12,9 +12,16 @@
 */
 
 use Illuminate\Support\Facades\Route;
+// Website
+Route::get('/', 'AppController@home') -> name('app.home');
+Route::get('/contacto', 'AppController@contacto') -> name('app.contacto');
+Route::get('/catalogo', 'AppController@catalogo') -> name('app.catalogo');
+Route::get('/catalogo/detalle', 'AppController@catalogo_detalle') -> name('app.catalogo.detalle');
+Route::get('/faqs', 'AppController@faqs') -> name('app.faqs');
+Route::get('/politicas', 'AppController@politicas') -> name('app.politicas');
+Route::get('/terminos', 'AppController@terminos') -> name('app.terminos');
 
 // Panel
-Route::get('/', 'AdminController@unauthenticated')->name('panel.admins.unauthenticated');
 Route::prefix('/admin')->group(function(){
     Route::get('/', 'AdminController@unauthenticated')->name('panel.admins.unauthenticated');
     Route::get('/password/reset', 'Auth\ForgotPasswordController@showAdminLinkRequestForm')->name('panel.admins.password.reset');
