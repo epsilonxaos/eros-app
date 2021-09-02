@@ -15,14 +15,14 @@
 			<h6 class="navbar-heading p-0 text-muted">Website - General</h6>
             <ul class="navbar-nav">
                 <li class="nav-item">
-					<a class="nav-link {{request() -> is('admin/eros/categorias*') ? 'active' : '' }}" href="{{route('panel.eros.categorias.index')}}">
-						<i class="ni ni-home text-default"></i>
-						<span class="nav-link-text">Home</span>
+					<a class="nav-link {{request() -> is('admin/website/catalogo-pdf*') ? 'active' : '' }}" href="{{route('panel.website.catalogo', ['id' => 1])}}">
+						<i class="fas fa-home text-default"></i>
+						<span class="nav-link-text">Catalogo PDF</span>
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link {{request() -> is('admin/faqs*') ? 'active' : '' }}" href="{{route('panel.faqs.index')}}">
-						<i class="fas fa-hotel text-default"></i>
+						<i class="fas fa-info-circle text-default"></i>
 						<span class="nav-link-text">Faqs</span>
 					</a>
 				</li>

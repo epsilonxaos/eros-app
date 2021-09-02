@@ -134,4 +134,10 @@ Route::prefix('/admin')->group(function(){
         Route::post('/update', 'FaqsController@update') -> name('panel.faqs.update');
         Route::delete('/destroy/{id}', 'FaqsController@destroy') -> name('panel.faqs.destroy');
     });
+
+    // Website
+    Route::prefix('/website')->middleware('auth:admin')->group(function(){
+        Route::get('/catalogo-pdf/{id}', 'WebsiteController@catalogoPdf') -> name('panel.website.catalogo');
+        Route::post('/catalogo-pdf/{id}/update', 'WebsiteController@catalogoPdfUpdate') -> name('panel.website.catalogo.update');
+    });
 });
