@@ -126,4 +126,12 @@ Route::prefix('/admin')->group(function(){
             Route::delete('/destroy/{id}', 'AmenidadesController@destroy') -> name('panel.eros.amenidades.destroy');
         });
     });
+
+    // Faqs
+    Route::prefix('/faqs')->middleware('auth:admin')->group(function(){
+        Route::get('/', 'FaqsController@index') -> name('panel.faqs.index');
+        Route::post('/add', 'FaqsController@store') -> name('panel.faqs.store');
+        Route::post('/update', 'FaqsController@update') -> name('panel.faqs.update');
+        Route::delete('/destroy/{id}', 'FaqsController@destroy') -> name('panel.faqs.destroy');
+    });
 });

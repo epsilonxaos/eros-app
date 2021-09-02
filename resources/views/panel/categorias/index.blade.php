@@ -62,7 +62,7 @@
                                                 <button onclick="mdEdit({{$num}})" class="btn btn-info btn-sm"><i class="fas fa-edit mr-2"></i> Editar</button>
                                                 {{-- @can(PermissionKey::Noticias['permissions']['edit']['name'])
                                                 @endcan --}}
-                                                <form action="{{route('panel.eros.categorias.destroy', ['id' => $row -> id])}}" method="post" class="d-inline">
+                                                <form action="{{route('panel.eros.categorias.destroy', ['id' => $row -> id])}}" method="post"  class="d-inline delete-form-{{$row -> id}}">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
