@@ -2,23 +2,91 @@
 
 namespace App\Http\Controllers;
 
+use App\Establecimiento;
+use App\EstablecimientoCategorias;
+use App\Productos;
+use App\Website;
 use Illuminate\Http\Request;
 
 class AppController extends Controller
 {
     public function home()
     {
-        return view('web.home');
+        $info['website'] = Website::find(1);
+        $info['establecimientos'] = Establecimiento::where('status', 1) -> get();
+        $info['categorias'] = EstablecimientoCategorias::where('status', 1) -> get();
+
+        return view('web.home', compact('info'));
     }
 
     public function contacto()
     {
-        return view('web.contacto');
+        $info['establecimientos'] = Establecimiento::where('status', 1) -> get();
+        return view('web.contacto', compact('info'));
     }
 
-    public function catalogo()
+    public function catalogo(Request $request)
     {
-        return view('web.catalogo');
+        $info['establecimientos'] = Establecimiento::where('status', 1) -> get();
+        $info['categorias'] = EstablecimientoCategorias::where('status', 1) -> get();
+        if(count($request -> all()) == 0) {
+            $info['productos'] = Productos::select('productos.*', "establecimientos.nombre AS nombreEstablecimiento")
+                -> join('producto_establecimiento', 'productos.id', '=', 'producto_establecimiento.producto_id')
+                -> join('establecimientos', 'producto_establecimiento.establecimiento_id', '=', 'establecimientos.id')
+                -> where([
+                    ["productos.status", "=", 1],
+                    ["establecimientos.id", "=", $info['establecimientos'][0] -> id],
+                    ["producto_establecimiento.establecimiento_id", "=", $info['establecimientos'][0] -> id],
+                ]) -> get();
+        } else {
+            if(isset($request -> categoria) && $request -> categoria !== null) {
+                if(isset($request -> establecimiento)) {
+                    $info['productos'] = Productos::select('productos.*', "establecimientos.nombre AS nombreEstablecimiento")
+                        -> join('producto_establecimiento', 'productos.id', '=', 'producto_establecimiento.producto_id')
+                        -> join('establecimientos', 'producto_establecimiento.establecimiento_id', '=', 'establecimientos.id')
+                        -> where([
+                            ["productos.status", "=", 1],
+                            ["productos.categorias_id", "=", $request -> categoria],
+                            ["establecimientos.id", "=", $request -> establecimiento],
+                            ["producto_establecimiento.establecimiento_id", "=", $request -> establecimiento],
+                        ]) -> get();
+                } else {
+                    $info['productos'] = Productos::select('productos.*', "establecimientos.nombre AS nombreEstablecimiento")
+                    -> join('producto_establecimiento', 'productos.id', '=', 'producto_establecimiento.producto_id')
+                    -> join('establecimientos', 'producto_establecimiento.establecimiento_id', '=', 'establecimientos.id')
+                    -> where([
+                        ["productos.status", "=", 1],
+                        ["productos.categorias_id", "=", $request -> categoria],
+                    ]) -> get();
+                }
+            } else {
+                $info['productos'] = Productos::select('productos.*', "establecimientos.nombre AS nombreEstablecimiento")
+                    -> join('producto_establecimiento', 'productos.id', '=', 'producto_establecimiento.producto_id')
+                    -> join('establecimientos', 'producto_establecimiento.establecimiento_id', '=', 'establecimientos.id')
+                    -> where([
+                        ["productos.status", "=", 1],
+                        ["establecimientos.id", "=", $request -> establecimiento],
+                        ["producto_establecimiento.establecimiento_id", "=", $request -> establecimiento],
+                    ]) -> get();
+            }
+        }
+
+        return view('web.catalogo', compact('info'));
+    }
+
+    public function catalogo_buscar(Request $request)
+    {
+        $info['establecimientos'] = Establecimiento::where('status', 1) -> get();
+        $info['categorias'] = EstablecimientoCategorias::where('status', 1) -> get();
+        $info['productos'] = Productos::select('productos.*', "establecimientos.nombre AS nombreEstablecimiento")
+            -> join('producto_establecimiento', 'productos.id', '=', 'producto_establecimiento.producto_id')
+            -> join('establecimientos', 'producto_establecimiento.establecimiento_id', '=', 'establecimientos.id')
+            -> where([
+                ["productos.status", "=", 1],
+                ["productos.nombre", "LIKE", "%{$request -> buscar}%"]
+            ]) -> get();
+
+        return view('web.catalogo', compact('info'));
     }
 
     public function catalogo_detalle()

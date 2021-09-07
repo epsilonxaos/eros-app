@@ -76,6 +76,8 @@ class EstablecimientoController extends Controller
         $add -> cover = $cover;
         $add -> lat = $request -> lat;
         $add -> lng = $request -> lng;
+        $add -> telefono = $request -> telefono;
+        $add -> email = $request -> email;
         $add -> save();
 
         return redirect() -> back() -> with('success', 'Establecimiento creado correctamente!');
@@ -89,7 +91,7 @@ class EstablecimientoController extends Controller
      */
     public function show(Establecimiento $establecimiento)
     {
-        
+
     }
 
     /**
@@ -142,6 +144,8 @@ class EstablecimientoController extends Controller
         $upd -> nombre = $request -> nombre;
         $upd -> lat = $request -> lat;
         $upd -> lng = $request -> lng;
+        $upd -> telefono = $request -> telefono;
+        $upd -> email = $request -> email;
         $upd -> save();
 
         return redirect() -> back() -> with('success', 'Establecimiento actualizado correctamente!');

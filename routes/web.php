@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'AppController@home') -> name('app.home');
 Route::get('/contacto', 'AppController@contacto') -> name('app.contacto');
 Route::get('/catalogo', 'AppController@catalogo') -> name('app.catalogo');
+Route::get('/sexshop', 'AppController@catalogo') -> name('app.sexshop');
+Route::get('/catalogo/buscar', 'AppController@catalogo_buscar') -> name('app.catalogo.buscar');
 Route::get('/catalogo/detalle', 'AppController@catalogo_detalle') -> name('app.catalogo.detalle');
 Route::get('/faqs', 'AppController@faqs') -> name('app.faqs');
 Route::get('/politicas', 'AppController@politicas') -> name('app.politicas');

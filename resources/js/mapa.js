@@ -264,14 +264,11 @@ window.initMap = function() {
         ]
     });
 
-    var marker = new google.maps.Marker({
-        position: eros_1,
-        map: map,
-        icon: PATH+'img/icons/icon_pin.png',
-    });
-    var marker2 = new google.maps.Marker({
-        position: eros_2,
-        map: map,
-        icon: PATH+'img/icons/icon_pin.png',
+    locations.map(location => {
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map,
+            icon: PATH+'img/icons/icon_pin.png',
+        });
     });
 }

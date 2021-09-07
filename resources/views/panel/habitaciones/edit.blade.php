@@ -11,6 +11,7 @@
                 <form action="{{route('panel.eros.productos.update', ['id' => $data -> id])}}" method="POST" enctype="multipart/form-data" class="form-submit-alert-wait">
                     @csrf
                     <input type="hidden" name="tipo" value="habitacion">
+                    <input type="hidden" name="categorias_id" value="1">
                     <div class="card">
                         <div class="card-header">
                             <div class="row align-items-center">
@@ -34,29 +35,12 @@
                                             <small class="text-danger pt-1">{{ $errors -> first('cover') }}</small>
                                         @endif
                                     </div>
-                                    <div class="col-12 col-lg-6 mb-4">
+                                    <div class="col-12 mb-4">
                                         <div class="form-group">
                                             <label for="nombre">Nombre del producto <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="nombre" value="{{(old('nombre')) ? old('nombre') :  $data -> nombre}}">
                                             @if($errors -> has('nombre'))
                                                 <small class="text-danger pt-1">{{ $errors -> first('nombre') }}</small>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-lg-6 mb-4">
-                                        <div class="form-group">
-                                            <label for="categorias_id">Categoria <span class="text-danger">*</span></label>
-                                            <select class="form-control" name="categorias_id">
-                                                <option value="">Seleccione una opción</option>
-                                                @php
-                                                    $categorias_id = (old('categorias_id')) ? old('categorias_id') : $data -> categorias_id;
-                                                @endphp
-                                                @foreach ($categorias as $item)
-                                                    <option {{$categorias_id == $item -> id ? 'selected' : ''}} value="{{$item -> id}}">{{$item -> nombre}}</option>
-                                                @endforeach
-                                            </select>
-                                            @if($errors -> has('categorias_id'))
-                                                <small class="text-danger pt-1">{{ $errors -> first('categorias_id') }}</small>
                                             @endif
                                         </div>
                                     </div>

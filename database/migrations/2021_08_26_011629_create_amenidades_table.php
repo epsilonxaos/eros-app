@@ -37,7 +37,7 @@ class CreateAmenidadesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('amenidades');
         Schema::dropIfExists('producto_amenidades');
+        Schema::dropIfExists('amenidades');
     }
 }

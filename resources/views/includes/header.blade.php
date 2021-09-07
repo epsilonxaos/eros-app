@@ -1,5 +1,5 @@
 <header class="{{(request() -> is('politicas') || request() -> is('terminos')) ? 'white' : ''}}">
-    <nav class="nav-menu py-3">
+    <nav class="nav-menu py-3" id="nav-menu">
         <div class="container-fluid w16">
             <div class="row align-items-center">
                 <div class="col-8 col-md-3">
@@ -9,12 +9,12 @@
                 </div>
                 <div class="col-md-9 d-none d-md-block">
                     <ul class="menu-list list-unstyled d-flex align-items-center justify-content-end p-0 m-0">
-                        <li><a href="#">Nosotros</a></li>
-                        <li class="move-animation ml-3 ml-lg-4"><a href="javascript:;" data-id="#habitaciones" data-space="0" data-speed="1000">Habitaciones</a></li>
-                        <li class="move-animation ml-3 ml-lg-4"><a href="javascript:;" data-id="#servicios" data-space="0" data-speed="1000">Servicios</a></li>
-                        <li class="ml-3 ml-lg-4"><a href="{{route('app.catalogo')}}">Sexshop</a></li>
-                        <li class="ml-3 ml-lg-4 active neon blue-neon"><a href="{{route('app.catalogo')}}">Catálogo</a></li>
-                        <li class="ml-3 ml-lg-4"><a href="{{route('app.contacto')}}">Contacto</a></li>
+                        <li class="move-animation ml-3 ml-lg-4 {{request() -> is("/") ? 'active neon blue-neon' : ''}}"><a class="static-menu" href="{{request() -> is("/") ? '#home' : route('app.home')."#home" }}" data-id="#home" data-space="0" data-speed="1000">Nosotros</a></li>
+                        <li class="move-animation ml-3 ml-lg-4"><a class="static-menu" href="{{request() -> is("/") ? '#habitaciones' : route('app.home')."#habitaciones" }}" data-id="#habitaciones" data-space="0" data-speed="1000">Habitaciones</a></li>
+                        <li class="move-animation ml-3 ml-lg-4"><a class="static-menu" href="{{request() -> is("/") ? '#servicios' : route('app.home')."#servicios" }}" data-id="#servicios" data-space="0" data-speed="1000">Servicios</a></li>
+                        <li class="ml-3 ml-lg-4 {{request() -> is("sexshop") ? 'active neon blue-neon' : ''}}"><a href="{{route('app.sexshop')."?categoria=2"}}">Sexshop</a></li>
+                        <li class="ml-3 ml-lg-4 {{request() -> is("catalogo") ? 'active neon blue-neon' : ''}}"><a href="{{route('app.catalogo')}}">Catálogo</a></li>
+                        <li class="ml-3 ml-lg-4 {{request() -> is("contacto") ? 'active neon blue-neon' : ''}}"><a href="{{route('app.contacto')}}">Contacto</a></li>
                     </ul>
                 </div>
                 <div class="col-4 d-md-none text-right">

@@ -5,12 +5,12 @@
 @endpush
 
 @section('content')
-    <div class="home-banner">
+    <div class="home-banner" id="home">
         <div class="container-fluid w12 h-100 pt-5 d-flex align-items-end position-relative">
             <div class="informacion">
                 <h3 class="mb-0 neon red-neon">Dejando nada a</h3>
                 <h1 class="mb-0 neon red-neon text-uppercase">La imaginación</h1>
-                <h3 class="mb-0">Consulta nuestro catálogo <a href="#" style="text-decoration: underline">aquí</a></h3>
+                <h3 class="mb-0">Consulta nuestro catálogo <a href="{{asset($info['website'] -> catagoloPDF) }}" target="_blank" style="text-decoration: underline">aquí</a></h3>
             </div>
 
             <span class="move-animation">
@@ -33,31 +33,20 @@
         <div class="container-fluid" style="max-width: 1600px">
             <h3 class="titulos text-center text-white mb-5 text-uppercase">Conoce nuestras habitaciones</h3>
             <div class="row">
-                <div class="col-12 col-md-6 pr-md-1 mb-2">
-                    <div class="bg bg-img-view p-4" style="background-image: url({{asset('img/habitaciones-bg-1.jpg')}})">
-                        <a href="{{route('app.catalogo')}}">
-                            <div class="d-flex align-items-center justify-content-center h-100">
-                                <div class="wp text-center">
-                                    <h2 class="text-white mb-0">Eros I</h2>
-                                    <h4 class="text-white mb-0">Entrar <img class="ml-2" src={{asset('img/icons/icon-link.png')}} alt="Go" /></h4>
+                @foreach ($info['establecimientos'] as $key => $item)
+                    <div class="col-12 col-md-6 {{$key % 2 === 0 ? 'pr-md-1' : 'pl-md-1'}} mb-2">
+                        <a href="{{route('app.catalogo')."?establecimiento=".$item -> id}}">
+                            <div class="bg bg-img-view p-4" style="background-image: url({{asset($item -> cover)}})">
+                                <div class="d-flex align-items-center justify-content-center h-100">
+                                    <div class="wp text-center">
+                                        <h2 class="text-white mb-0">{{$item -> nombre}}</h2>
+                                        <h4 class="text-white mb-0">Entrar <img class="ml-2" src={{asset('img/icons/icon-link.png')}} alt="Go" /></h4>
+                                    </div>
                                 </div>
                             </div>
                         </a>
                     </div>
-                </div>
-
-                <div class="col-12 col-md-6 pl-md-1">
-                    <div class="bg bg-img-view p-4" style="background-image: url({{asset('img/habitaciones-bg-2.jpg')}})">
-                        <a href="{{route('app.catalogo')}}">
-                            <div class="d-flex align-items-center justify-content-center h-100">
-                                <div class="wp text-center">
-                                    <h2 class="text-white mb-0">Eros II</h2>
-                                    <h4 class="text-white mb-0">Entrar <img class="ml-2" src={{asset('img/icons/icon-link.png')}} alt="Go" /></h4>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -66,42 +55,19 @@
         <div class="container-fluid w16">
             <h3 class="titulos text-center text-white mb-5 text-uppercase">¿Qué se te antoja?</h3>
             <div class="row">
-                <div class="col-12 col-md-6 pr-md-1 mb-2">
-                    <div class="bg bg-img-view p-4" style="background-image: url({{asset('img/extras-bg-1.jpg')}})">
-                        <div class="d-flex align-items-center justify-content-center h-100">
-                            <div class="wp text-center text-md-left">
-                                <h2 class="text-white mb-0">Alimentos <img class="ml-2" src={{asset('img/icons/icon-link.png')}} alt="Go" /></h2>
+                @foreach ($info['categorias'] as $key => $item)
+                    <div class="col-12 col-md-6 {{$key % 2 === 0 ? 'pr-md-1' : 'pl-md-1'}} mb-2">
+                        <a href="{{route('app.catalogo')."?categoria=".$item -> id}}">
+                            <div class="bg bg-img-view p-4" style="background-image: url({{asset($item -> cover)}})">
+                                <div class="d-flex align-items-center justify-content-center h-100">
+                                    <div class="wp text-center text-md-left">
+                                        <h2 class="text-white mb-0">{{$item -> nombre}} <img class="ml-2" src={{asset('img/icons/icon-link.png')}} alt="Go" /></h2>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
-                </div>
-                <div class="col-12 col-md-6 pl-md-1 mb-2">
-                    <div class="bg bg-img-view p-4" style="background-image: url({{asset('img/extras-bg-2.jpg')}})">
-                        <div class="d-flex align-items-center justify-content-center h-100">
-                            <div class="wp text-center text-md-right">
-                                <h2 class="text-white mb-0">Sexshop II <img class="ml-2" src={{asset('img/icons/icon-link.png')}} alt="Go" /></h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 pr-md-1 mb-2">
-                    <div class="bg bg-img-view p-4" style="background-image: url({{asset('img/extras-bg-3.jpg')}})">
-                        <div class="d-flex align-items-center justify-content-center h-100">
-                            <div class="wp text-center text-md-left">
-                                <h2 class="text-white mb-0">Promociones <img class="ml-2" src={{asset('img/icons/icon-link.png')}} alt="Go" /></h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 pl-md-1 mb-2">
-                    <div class="bg bg-img-view p-4" style="background-image: url({{asset('img/extras-bg-4.jpg')}})">
-                        <div class="d-flex align-items-center justify-content-center h-100">
-                            <div class="wp text-center text-md-right">
-                                <h2 class="text-white mb-0">Bebidas <img class="ml-2" src={{asset('img/icons/icon-link.png')}} alt="Go" /></h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -111,16 +77,18 @@
             <h3 class="titulos text-white mb-5">Contactanos</h3>
 
             <div class="row mb-4">
-                <div class="col-12 col-md-4 col-xl-4">
-                    <h3 class="text-white mb-3"><span class="neon red-neon">Eros I</span></h3>
-                    <h4 class="text-white mb-1">T. <a href="tel:+529991567890">999 156 7890</a></h4>
-                    <h4 class="text-white mb-4">C. <a href="mailto:erossuite@gmail.com">erossuite@gmail.com</a></h4>
-                </div>
-                <div class="col-12 col-md-4 col-xl-4">
+                @foreach ($info['establecimientos'] as $item)
+                    <div class="col-12 col-md-4 col-xl-4 mb-4">
+                        <h3 class="text-white mb-3"><span class="neon red-neon">{{$item -> nombre}}</span></h3>
+                        <h4 class="text-white mb-1">T. <a href="tel:+52{{$item -> telefono}}">{{$item -> telefono}}</a></h4>
+                        <h4 class="text-white mb-4">C. <a href="mailto:{{$item -> email}}">{{$item -> email}}</a></h4>
+                    </div>
+                @endforeach
+                {{-- <div class="col-12 col-md-4 col-xl-4">
                     <h3 class="text-white mb-3"><span class="neon red-neon">Eros II</span></h3>
                     <h4 class="text-white mb-1">T. <a href="tel:+529993728835">999 372 8835</a></h4>
                     <h4 class="text-white mb-4">C. <a href="mailto:erossuite@gmail.com">erossuite@gmail.com</a></h4>
-                </div>
+                </div> --}}
             </div>
 
 
@@ -129,7 +97,22 @@
     </div>
 @endsection
 
+@php
+    $locations = Array();
+
+    foreach ($info['establecimientos'] as $key => $item) {
+        if($item -> lng && $item -> lat) {
+            $row['lng'] = $item -> lng;
+            $row['lat'] = $item -> lat;
+            array_push($locations, $row);
+        }
+    }
+@endphp
+
 @push('js')
+    <script type="text/javascript">
+        const locations = @json($locations);
+    </script>
     <script type="text/javascript" src="{{mix('js/mapa.js')}}"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZ2z7aoo8okwvyHbaxfKwUi-sblBj5QYk&callback=initMap"></script>
 @endpush

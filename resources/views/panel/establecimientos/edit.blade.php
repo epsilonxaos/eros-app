@@ -40,6 +40,18 @@
                                     </div>
                                     <div class="col-12 col-sm-6 mb-4">
                                         <div class="form-group">
+                                            <label for="telefono">Teléfono</label>
+                                            <input type="number" class="form-control" name="telefono" id="telefono" value="{{(old('telefono')) ? old('telefono') : $data -> telefono}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 mb-4">
+                                        <div class="form-group">
+                                            <label for="email">Correo electrónico</label>
+                                            <input type="email" class="form-control" name="email" id="email" value="{{(old('email')) ? old('email') : $data -> email}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 mb-4">
+                                        <div class="form-group">
                                             <label for="lat"> Latitud</label>
                                             <input type="text" class="form-control" name="lat" id="lat" value="{{(old('lat')) ? old('lat') : $data -> lat}}">
                                         </div>
