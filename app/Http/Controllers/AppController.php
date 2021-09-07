@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Amenidades;
 use App\Establecimiento;
 use App\EstablecimientoCategorias;
+use App\ProductoGaleria;
 use App\Productos;
 use App\Website;
 use Illuminate\Http\Request;
@@ -89,9 +91,25 @@ class AppController extends Controller
         return view('web.catalogo', compact('info'));
     }
 
-    public function catalogo_detalle()
+    public function catalogo_detalle(Int $id)
     {
-        return view('web.catalogo-detalle');
+        $info['producto'] = Productos::select('productos.*', "establecimientos.nombre AS nombreEstablecimiento",)
+            -> join('producto_establecimiento', 'productos.id', '=', 'producto_establecimiento.producto_id')
+            -> join('establecimientos', 'producto_establecimiento.establecimiento_id', '=', 'establecimientos.id')
+            -> where([
+                ["productos.id", "=", $id]
+            ]) -> first();
+        $info['galeria'] = ProductoGaleria::where("producto_id",  $id) -> get();
+        $info['amenidades'] = Amenidades::select('amenidades.*')
+            -> join('producto_amenidades', 'amenidades.id', '=', 'producto_amenidades.amenidades_id')
+            -> where([
+                ["producto_amenidades.producto_id", "=", $id]
+            ]) -> get();
+        $info['otros'] = Productos::where([
+            ["status", "=", 1],
+            ["id", "!=", $id]
+        ]) -> inRandomOrder() -> limit(8);
+        return view('web.catalogo-detalle', compact('info'));
     }
 
     public function faqs ()

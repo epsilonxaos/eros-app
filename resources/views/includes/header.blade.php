@@ -13,7 +13,7 @@
                         <li class="move-animation ml-3 ml-lg-4"><a class="static-menu" href="{{request() -> is("/") ? '#habitaciones' : route('app.home')."#habitaciones" }}" data-id="#habitaciones" data-space="0" data-speed="1000">Habitaciones</a></li>
                         <li class="move-animation ml-3 ml-lg-4"><a class="static-menu" href="{{request() -> is("/") ? '#servicios' : route('app.home')."#servicios" }}" data-id="#servicios" data-space="0" data-speed="1000">Servicios</a></li>
                         <li class="ml-3 ml-lg-4 {{request() -> is("sexshop") ? 'active neon blue-neon' : ''}}"><a href="{{route('app.sexshop')."?categoria=2"}}">Sexshop</a></li>
-                        <li class="ml-3 ml-lg-4 {{request() -> is("catalogo") ? 'active neon blue-neon' : ''}}"><a href="{{route('app.catalogo')}}">Catálogo</a></li>
+                        <li class="ml-3 ml-lg-4 {{request() -> is("catalogo*") ? 'active neon blue-neon' : ''}}"><a href="{{route('app.catalogo')}}">Catálogo</a></li>
                         <li class="ml-3 ml-lg-4 {{request() -> is("contacto") ? 'active neon blue-neon' : ''}}"><a href="{{route('app.contacto')}}">Contacto</a></li>
                     </ul>
                 </div>

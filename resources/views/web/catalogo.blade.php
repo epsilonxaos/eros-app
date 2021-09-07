@@ -77,7 +77,7 @@
                         <div class="col-12 col-sm-6 col-md-6 col-lg-4 card-result bg bg-img-view py-4" style="background-image: url({{asset($item -> cover)}})">
                             <div class="wpc w-100 h-100 position-absolute d-flex align-items-center justify-content-center align-items-md-end justify-content-md-start">
                                 <div class="wp text-center text-md-left">
-                                    <a href="{{route('app.catalogo.detalle')}}">
+                                    <a href="{{route('app.catalogo.detalle', ["id" => $item -> id, "url" => Str::slug($item -> nombre, '-')])}}">
                                         <h2 class="text-white neon red-neon mb-0">{{$item -> nombre}}</h2>
                                         <p class="text-white">{{$item -> nombreEstablecimiento}}</p>
                                     </a>
