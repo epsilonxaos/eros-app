@@ -2,15 +2,22 @@
 
 @push('link')
     <link rel="stylesheet" href="{{mix('css/home.css')}}">
+    <style>
+        .vimeo-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; overflow: hidden; }
+        .vimeo-wrapper iframe { width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 0; left: 50% !important; transform: translateX(-50%); }
+        @media screen and (min-width: 768px){
+            .vimeo-wrapper iframe { top: 0; left: 50% !important; transform: translateX(-50%); }
+        }
+    </style>
 @endpush
 
 @section('content')
     <div class="home-banner" id="home">
         <div class="container-fluid w12 h-100 pt-5 d-flex align-items-end position-relative">
             <div class="informacion">
-                <h3 class="mb-0 neon red-neon">Dejando nada a</h3>
-                <h1 class="mb-0 neon red-neon text-uppercase">La imaginación</h1>
-                <h3 class="mb-0">Consulta nuestro catálogo <a href="{{asset($info['website'] -> catagoloPDF) }}" target="_blank" style="text-decoration: underline">aquí</a></h3>
+                <h3 class="mb-0">{{$info['website'] -> banner_texto_1}}</h3>
+                <h1 class="mb-0 text-uppercase">{{$info['website'] -> banner_texto_2}}</h1>
+                <h3 class="mb-0">{{$info['website'] -> banner_texto_3}} <a href="{{asset($info['website'] -> catagoloPDF) }}" target="_blank" style="text-decoration: underline">aquí</a></h3>
             </div>
 
             <span class="move-animation">
@@ -21,20 +28,21 @@
         </div>
 
         <div class="video-banner-bg" style="background-color: #323232">
-            <video muted loop autoplay class="w-100">
+            {{-- <video muted loop autoplay class="w-100">
                 <source src="{{asset('video/video-test.mp4')}}" type="video/mp4">
                 Your browser does not support the video tag.
-            </video>
-            {{-- <iframe src="https://player.vimeo.com/video/11550303?autoplay=1&color=ffffff&title=0&byline=0&portrait=0&loop=10&background=1&muted=1" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe> --}}
+            </video> --}}
+            {{-- <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/183174083?h=112327f091&autoplay=1&title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script> --}}
+            <iframe src="https://player.vimeo.com/video/183174083?autoplay=1&color=ffffff&title=0&byline=0&portrait=0&loop=10&background=1&muted=1" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
 
     <div class="home-habitaciones bg-black" id="habitaciones">
         <div class="container-fluid" style="max-width: 1600px">
-            <h3 class="titulos text-center text-white mb-5 text-uppercase">Conoce nuestras habitaciones</h3>
+            <h3 class="titulos text-center text-white mb-5 text-uppercase">{{$info['website'] -> hab_titulo}}</h3>
             <div class="row">
                 @foreach ($info['establecimientos'] as $key => $item)
-                    <div class="col-12 col-md-6 {{$key % 2 === 0 ? 'pr-md-1' : 'pl-md-1'}} mb-2">
+                    <div class="col-12 {{count($info['establecimientos']) !== ($key + 1) ? 'col-md-6' : (($key % 2 === 0) ? '' : 'col-md-6')}} {{$key % 2 === 0 ? 'pr-md-1' : 'pl-md-1'}} mb-2">
                         <a href="{{route('app.catalogo')."?establecimiento=".$item -> id}}">
                             <div class="bg bg-img-view p-4" style="background-image: url({{asset($item -> cover)}})">
                                 <div class="d-flex align-items-center justify-content-center h-100">
@@ -53,10 +61,10 @@
 
     <div class="home-extras bg-black" id="servicios">
         <div class="container-fluid w16">
-            <h3 class="titulos text-center text-white mb-5 text-uppercase">¿Qué se te antoja?</h3>
+            <h3 class="titulos text-center text-white mb-5 text-uppercase">{{$info['website'] -> ser_titulo}}</h3>
             <div class="row">
                 @foreach ($info['categorias'] as $key => $item)
-                    <div class="col-12 col-md-6 {{$key % 2 === 0 ? 'pr-md-1' : 'pl-md-1'}} mb-2">
+                    <div class="col-12 {{count($info['categorias']) !== ($key + 1) ? 'col-md-6' : (($key % 2 === 0) ? '' : 'col-md-6')}} {{$key % 2 === 0 ? 'pr-md-1' : 'pl-md-1'}} mb-2">
                         <a href="{{route('app.catalogo')."?categoria=".$item -> id}}">
                             <div class="bg bg-img-view p-4" style="background-image: url({{asset($item -> cover)}})">
                                 <div class="d-flex align-items-center justify-content-center h-100">
@@ -74,9 +82,9 @@
 
     <div class="home-contacto">
         <div class="container-fluid w16">
-            <h3 class="titulos text-white mb-5">Contactanos</h3>
+            <h3 class="titulos text-white mb-5 text-center">{{$info['website'] -> con_titulo}}</h3>
 
-            <div class="row mb-4">
+            <div class="row mb-4 text-center justify-content-center">
                 @foreach ($info['establecimientos'] as $item)
                     <div class="col-12 col-md-4 col-xl-4 mb-4">
                         <h3 class="text-white mb-3"><span class="neon red-neon">{{$item -> nombre}}</span></h3>
@@ -102,8 +110,8 @@
 
     foreach ($info['establecimientos'] as $key => $item) {
         if($item -> lng && $item -> lat) {
-            $row['lng'] = $item -> lng;
-            $row['lat'] = $item -> lat;
+            $row['lng'] = floatval($item -> lng);
+            $row['lat'] = floatval($item -> lat);
             array_push($locations, $row);
         }
     }

@@ -2,12 +2,12 @@
     <nav class="nav-menu py-3" id="nav-menu">
         <div class="container-fluid w16">
             <div class="row align-items-center">
-                <div class="col-8 col-md-3">
+                <div class="col-8 col-md-3 pl-md-4 pl-lg-5">
                     <a href="{{route('app.home')}}">
                         <img src={{asset('img/logo-white.svg')}} alt="Eros" class="logo" >
                     </a>
                 </div>
-                <div class="col-md-9 d-none d-md-block">
+                <div class="col-md-9 pr-md-4 pr-lg-5 d-none d-md-block">
                     <ul class="menu-list list-unstyled d-flex align-items-center justify-content-end p-0 m-0">
                         <li class="move-animation ml-3 ml-lg-4 {{request() -> is("/") ? 'active neon blue-neon' : ''}}"><a class="static-menu" href="{{request() -> is("/") ? '#home' : route('app.home')."#home" }}" data-id="#home" data-space="0" data-speed="1000">Nosotros</a></li>
                         <li class="move-animation ml-3 ml-lg-4"><a class="static-menu" href="{{request() -> is("/") ? '#habitaciones' : route('app.home')."#habitaciones" }}" data-id="#habitaciones" data-space="0" data-speed="1000">Habitaciones</a></li>

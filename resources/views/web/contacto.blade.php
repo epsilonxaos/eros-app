@@ -35,8 +35,8 @@
 
     foreach ($info['establecimientos'] as $key => $item) {
         if($item -> lng && $item -> lat) {
-            $row['lng'] = $item -> lng;
-            $row['lat'] = $item -> lat;
+            $row['lng'] = floatval($item -> lng);
+            $row['lat'] = floatval($item -> lat);
             array_push($locations, $row);
         }
     }

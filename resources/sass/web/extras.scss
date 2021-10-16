@@ -20,6 +20,7 @@
             font-weight: bold;
             line-height: 1;
 
+
             @media screen and (min-width: 768px){
                 $sizef: 50px;
                 font-size: $sizef;
@@ -27,6 +28,9 @@
             @media screen and (min-width: 992px){
                 $sizef: 80px;
                 font-size: $sizef;
+            }
+            @media screen and (max-height: 669px){
+                font-size: clamp(30px, 15vh, 45px) !important;
             }
 
             span {
@@ -40,6 +44,9 @@
                 }
                 @media screen and (min-width: 992px){
                     font-size: $sizef - 12px;
+                }
+                @media screen and (max-height: 669px){
+                    font-size: clamp(18px, 15vh, 25px) !important;
                 }
             }
             & > span:first-child {

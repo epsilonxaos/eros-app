@@ -1,4 +1,4 @@
-<footer class="pb-4">
+<footer class="pb-4 {{(request() -> is('politicas') || request() -> is('terminos')) ? 'white' : ''}}">
     <div class="container-fluid w16">
         <div class="row">
             <div class="col-12 col-md-9 text-center text-md-left d-md-flex align-items-md-center justify-content-md-start mb-4 mb-md-0">

@@ -55,6 +55,9 @@
                                             <input type="email" class="form-control" name="email" id="email" value="{{old('email')}}">
                                         </div>
                                     </div>
+                                    <div class="col-12">
+                                        <p class="small">Si no cuenta con conocimientos para obtener la latitud y la longitud mediante Maps, puede usar nuestra mapa integrado que se encuentra en la parte de abajo, para obtener las coordenadas de manera automatica haga clic derecho sobre la ubicación.</p>
+                                    </div>
                                     <div class="col-12 col-sm-6 mb-4">
                                         <div class="form-group">
                                             <label for="lat"> Latitud</label>
@@ -64,8 +67,12 @@
                                     <div class="col-12 col-sm-6 mb-4">
                                         <div class="form-group">
                                             <label for="lng"> Longitud</label>
-                                            <input type="text" class="form-control" name="lng" id="lat" value="{{old('lng')}}">
+                                            <input type="text" class="form-control" name="lng" id="lng" value="{{old('lng')}}">
                                         </div>
+                                    </div>
+                                    <div class="col-12 position-relative">
+                                        <p></p>
+                                        <div id="map" style="height: 400px"></div>
                                     </div>
                                 </div>
                             </div>
@@ -83,15 +90,30 @@
 @endsection
 
 @push('js')
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v1.0.0-rc.1/leaflet.css">
+    <script src="http://cdn.leafletjs.com/leaflet/v1.0.0-rc.1/leaflet.js"></script>
+
+    <script>
+
+        var map = L.map("map").setView([20.971145, -89.622943], 12);
+
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var market;
+
+        map.on("contextmenu", function (event) {
+            console.log("user right-clicked on map coordinates: " + event.latlng.toString());
+            if(market) map.removeLayer(market);
+            market = L.marker(event.latlng).addTo(map);
+
+            document.getElementById('lat').value = event.latlng.lat;
+            document.getElementById('lng').value = event.latlng.lng;
+            console.log(event.latlng.lat, event.latlng.lng);
+        });
+    </script>
     <script type="text/javascript">
         $('.dropify').dropify();
-
-        // function limitText(limitField, limitNum) {
-        //     if (limitField.value.length > limitNum) {
-        //         limitField.value = limitField.value.substring(0, limitNum);
-        //     } else {
-        //         document.querySelector('.limitText').innerHTML = limitNum - limitField.value.length;
-        //     }
-        // }
     </script>
 @endpush

@@ -12,10 +12,10 @@ class WebsiteController extends Controller
     public function catalogoPdf (Int $id)
     {
         return view('panel.catalogoPdf.edit', [
-            'title' => 'Catalogo PDF',
+            'title' => 'Website - Textos',
             'breadcrumb' => [
                 [
-                    'title' => 'Catalogo PDF',
+                    'title' => 'Website',
                     'route' => 'panel.website.catalogo',
                     'active' => true,
                     'params' => [
@@ -29,12 +29,22 @@ class WebsiteController extends Controller
 
     public function catalogoPdfUpdate(Int$id, Request $request)
     {
-        $pdf = Helpers::addFileStorage($request -> file('pdf'), $this -> directorio);
         $udp = Website::find($id);
-        Helpers::deleteFileStorage('website', 'catagoloPDF', $id);
-        $udp -> catagoloPDF = $pdf;
+        if($request -> hasFile('pdf')) {
+            $pdf = Helpers::addFileStorage($request -> file('pdf'), $this -> directorio);
+            Helpers::deleteFileStorage('website', 'catagoloPDF', $id);
+            $udp -> catagoloPDF = $pdf;
+            $udp -> save();
+        }
+
+        $udp -> banner_texto_1 = $request -> banner_texto_1;
+        $udp -> banner_texto_2 = $request -> banner_texto_2;
+        $udp -> banner_texto_3 = $request -> banner_texto_3;
+        $udp -> hab_titulo = $request -> hab_titulo;
+        $udp -> ser_titulo = $request -> ser_titulo;
+        $udp -> con_titulo = $request -> con_titulo;
         $udp -> save();
 
-        return redirect() -> back() -> with('success', 'Catalogo actualizado correctamente!');
+        return redirect() -> back() -> with('success', 'Website actualizado correctamente!');
     }
 }

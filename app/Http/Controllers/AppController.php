@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Amenidades;
 use App\Establecimiento;
 use App\EstablecimientoCategorias;
+use App\Faqs;
 use App\ProductoGaleria;
 use App\Productos;
 use App\Website;
@@ -114,7 +115,8 @@ class AppController extends Controller
 
     public function faqs ()
     {
-        return view('web.faqs');
+        $info['faqs'] = Faqs::all();
+        return view('web.faqs', compact('info'));
     }
 
     public function politicas ()

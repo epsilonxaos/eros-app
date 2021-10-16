@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class Helpers {
     /**
@@ -15,12 +16,15 @@ class Helpers {
      * @return $ruta
      */
     public static function addFileStorage($file, $directorio) {
-        $ruta = $file -> store($directorio);
-        $exploded = explode('/', $ruta);
-        $exploded[0] = 'storage';
-        $ruta = implode('/', $exploded);
+        $ruta = Storage::disk('public_uploads')->put($directorio, $file);
 
-        return $ruta;
+        return 'uploads/'.$ruta;
+        // $ruta = $file -> store($directorio);
+        // $exploded = explode('/', $ruta);
+        // $exploded[0] = 'storage';
+        // $ruta = implode('/', $exploded);
+
+        // return $ruta;
     }
 
     /**

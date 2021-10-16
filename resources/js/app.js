@@ -16,7 +16,7 @@ document.getElementById('btn-menu-movil').addEventListener('click', function(){
 document.addEventListener("DOMContentLoaded", function(){
     setTimeout(() => {
         $('.loading').fadeOut();
-    }, 1500);
+    }, 15000);
 });
 
 if(document.querySelector('.move-animation')){

@@ -17,7 +17,7 @@
                 <li class="nav-item">
 					<a class="nav-link {{request() -> is('admin/website/catalogo-pdf*') ? 'active' : '' }}" href="{{route('panel.website.catalogo', ['id' => 1])}}">
 						<i class="fas fa-home text-default"></i>
-						<span class="nav-link-text">Catalogo PDF</span>
+						<span class="nav-link-text">Website</span>
 					</a>
 				</li>
 				<li class="nav-item">
