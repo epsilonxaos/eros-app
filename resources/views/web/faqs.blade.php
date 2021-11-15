@@ -36,7 +36,7 @@
 
                                 <div id="collapse-{{$i}}" class="collapse show" aria-labelledby="heading-{{$i}}" data-parent="#preguntasAcordion">
                                     <div class="card-body text-white text-center">
-                                        <p>{{$item -> informacion}}</p>
+                                        {!! $item -> informacion !!}
                                     </div>
                                 </div>
                             </div>

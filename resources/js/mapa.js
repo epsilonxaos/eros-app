@@ -2,8 +2,6 @@ var map;
 
 window.initMap = function() {
     var center = {lat: 20.937146, lng: -89.646503};
-    var eros_1 = {lat: 20.938109, lng: -89.695346}
-    var eros_2 = {lat: 20.928531, lng: -89.596975}
 
     map = new google.maps.Map(document.getElementById('mapa'), {
         zoom: 13,
@@ -265,10 +263,29 @@ window.initMap = function() {
     });
 
     locations.map(location => {
+        var contentString =
+            `<div id="content">
+                <h5>${location.name}</h5>
+                <p style="font-size: 14px">Como llegar: <a style="color: #1b76ff; font-weight: bold" target="_blank" href="https://www.google.com/maps/search/?api=1&query=${location.lat}%2C${location.lng}">clic aqui</a></p>
+            </div>`;
+
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString,
+        });
+
         var marker = new google.maps.Marker({
             position: location,
             map: map,
             icon: PATH+'img/icons/icon_pin.png',
+            title: location.name
+        });
+
+        marker.addListener("click", () => {
+            infowindow.open({
+            anchor: marker,
+            map,
+                shouldFocus: false,
+            });
         });
     });
 }

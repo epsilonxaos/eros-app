@@ -12,8 +12,9 @@
                     @if (count($info['galeria']) > 0)
                         <div class="swiper-container gallery-top">
                             <div class="swiper-wrapper">
+                                <div class="swiper-slide"><img src="{{$info['producto'] -> cover}}" alt="Galeria" class="img-object slide"></div>
                                 @for ($i = 0; $i < 5; $i++)
-                                    <div class="swiper-slide"><img src="https://source.unsplash.com/random?sig={{$i + 1}}" alt="Galeria" class="img-object slide"></div>
+                                    <div class="swiper-slide"><img src="{{$info['galeria'] -> img}}" alt="Galeria" class="img-object slide"></div>
                                 @endfor
                             </div>
                             <div class="swiper-button-next swiper-button-white"></div>
@@ -21,8 +22,9 @@
                         </div>
                         <div class="swiper-container gallery-thumbs">
                             <div class="swiper-wrapper">
+                                <div class="swiper-slide"><img src="{{$info['producto'] -> cover}}" alt="Galeria" class="img-object thumbs"></div>
                                 @for ($i = 0; $i < 5; $i++)
-                                    <div class="swiper-slide"><img src="https://source.unsplash.com/random?sig={{$i + 1}}" alt="Galeria" class="img-object thumbs"></div>
+                                    <div class="swiper-slide"><img src="{{$info['galeria'] -> img}}" alt="Galeria" class="img-object thumbs"></div>
                                 @endfor
                             </div>
                         </div>
@@ -51,7 +53,7 @@
             </div>
 
             <div class="row justify-content-center">
-                <div class="col-12 col-md-8">
+                <div class="col-12 col-md-8 text-white">
                     {!! $info['producto'] -> descripcion_extra !!}
                     <div class="mb-5"></div>
                     <hr>

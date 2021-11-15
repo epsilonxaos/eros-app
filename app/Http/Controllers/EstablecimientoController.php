@@ -78,6 +78,10 @@ class EstablecimientoController extends Controller
         $add -> lng = $request -> lng;
         $add -> telefono = $request -> telefono;
         $add -> email = $request -> email;
+        $add -> facebook = $request -> facebook;
+        $add -> instagram = $request -> instagram;
+        $add -> twitter = $request -> twitter;
+        $add -> whatsapp = $request -> whatsapp;
         $add -> save();
 
         return redirect() -> back() -> with('success', 'Establecimiento creado correctamente!');
@@ -146,6 +150,10 @@ class EstablecimientoController extends Controller
         $upd -> lng = $request -> lng;
         $upd -> telefono = $request -> telefono;
         $upd -> email = $request -> email;
+        $upd -> facebook = $request -> facebook;
+        $upd -> instagram = $request -> instagram;
+        $upd -> twitter = $request -> twitter;
+        $upd -> whatsapp = $request -> whatsapp;
         $upd -> save();
 
         return redirect() -> back() -> with('success', 'Establecimiento actualizado correctamente!');

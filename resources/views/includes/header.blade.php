@@ -30,23 +30,23 @@
         <img src="{{asset('img/logo-black.svg')}}" alt="Eros" class="mb-4" style="max-width: 250px">
 
         <ul class="list-unstyled mb-0 p-0">
-            <li><a class="active neon yellow-neon text-dark" href="#">Nosotros</a></li>
-            <li class="move-animation"><a class="" href="javascript:;" data-id="#habitaciones" data-space="60" data-speed="1000">Habitaciones</a></li>
-            <li class="move-animation"><a class="" href="javascript:;" data-id="#servicios" data-space="60" data-speed="1000">Servicios</a></li>
-            <li><a class="" href="{{route('app.catalogo')}}">Sexshop</a></li>
-            <li><a class="" href="{{route('app.catalogo')}}">Catálogo</a></li>
-            <li><a class="" href="{{route('app.contacto')}}">Contacto</a></li>
+            <li class="move-animation"><a class="static-menu {{request() -> is("/") ? 'active neon red-neon text-dark' : ''}}" href="{{request() -> is("/") ? '#home' : route('app.home')."#home" }}" data-id="#home" data-space="0" data-speed="1000">Nosotros</a></li>
+            <li class="move-animation"><a class="static-menu" href="{{request() -> is("/") ? '#habitaciones' : route('app.home')."#habitaciones" }}" data-id="#habitaciones" data-space="90" data-speed="1000">Habitaciones</a></li>
+            <li class="move-animation"><a class="static-menu" href="{{request() -> is("/") ? '#servicios' : route('app.home')."#servicios" }}" data-id="#servicios" data-space="90" data-speed="1000">Servicios</a></li>
+            <li><a class="{{request() -> is("sexshop") ? 'active neon red-neon text-dark' : ''}}" href="{{route('app.catalogo')}}">Sexshop</a></li>
+            <li><a class="{{request() -> is("catalogo*") ? 'active neon red-neon text-dark' : ''}}" href="{{route('app.catalogo')}}">Catálogo</a></li>
+            <li><a class="{{request() -> is("contacto") ? 'active neon red-neon text-dark' : ''}}" href="{{route('app.contacto')}}">Contacto</a></li>
         </ul>
 
         <hr>
         <p class="mb-0"><a href="">FAQ's</a></p>
         <p class="mb-0"><a href="">Terminos y condiciones</a></p>
         <p><a href="">Aviso de privacidad</a></p>
-        <hr>
+        {{-- <hr> --}}
 
-        <a href=""><img class="icon" src="{{asset('img/icons/facebook.svg')}}" alt="Facebook"></a>
-        <a href=""><img class="icon" src="{{asset('img/icons/twitter.svg')}}" alt="twitter"></a>
-        <a href=""><img class="icon" src="{{asset('img/icons/instagram.svg')}}" alt="instagram"></a>
-        <a href=""><img class="icon" src="{{asset('img/icons/whatsapp.svg')}}" alt="whatsapp"></a>
+        {{-- <a href=""><img class="icon" src="{{asset('img/icons/facebook.svg')}}" alt="Facebook"></a> --}}
+        {{-- <a href=""><img class="icon" src="{{asset('img/icons/twitter.svg')}}" alt="twitter"></a> --}}
+        {{-- <a href=""><img class="icon" src="{{asset('img/icons/instagram.svg')}}" alt="instagram"></a> --}}
+        {{-- <a href=""><img class="icon" src="{{asset('img/icons/whatsapp.svg')}}" alt="whatsapp"></a> --}}
     </nav>
 </header>

@@ -50,7 +50,37 @@
                                             <input type="email" class="form-control" name="email" id="email" value="{{(old('email')) ? old('email') : $data -> email}}">
                                         </div>
                                     </div>
+                                    <hr class="col-12">
+                                    <div class="col-12 mb-4">
+                                        <h3>Redes sociales</h3>
+                                    </div>
+                                    <div class="col-12 col-sm-6 mb-4">
+                                        <div class="form-group">
+                                            <label for="facebook"> Facebook</label>
+                                            <input type="facebook" class="form-control" name="facebook" id="facebook" value="{{(old('facebook')) ? old('facebook') : $data -> facebook}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 mb-4">
+                                        <div class="form-group">
+                                            <label for="instagram"> Instagram</label>
+                                            <input type="instagram" class="form-control" name="instagram" id="instagram" value="{{(old('instagram')) ? old('instagram') : $data -> instagram}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 mb-4">
+                                        <div class="form-group">
+                                            <label for="twitter"> Twitter</label>
+                                            <input type="twitter" class="form-control" name="twitter" id="twitter" value="{{(old('twitter')) ? old('twitter') : $data -> twitter}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 mb-4">
+                                        <div class="form-group">
+                                            <label for="whatsapp"> Whatsapp</label>
+                                            <input type="whatsapp" class="form-control" name="whatsapp" id="whatsapp" value="{{(old('whatsapp')) ? old('whatsapp') : $data -> whatsapp}}">
+                                        </div>
+                                    </div>
+                                    <hr class="col-12">
                                     <div class="col-12">
+                                        <h3 class="mb-4">Ubicacion del establecimiento</h3>
                                         <p class="small">Si no cuenta con conocimientos para obtener la latitud y la longitud mediante Maps, puede usar nuestra mapa integrado que se encuentra en la parte de abajo, para obtener las coordenadas de manera automatica haga clic derecho sobre la ubicación.</p>
                                     </div>
                                     <div class="col-12 col-sm-6 mb-4">

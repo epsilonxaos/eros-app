@@ -97,7 +97,9 @@
                             </div>
                             <div class="col-12 mb-4">
                                 <label for="informacion">Información <span class="text-danger">*</span></label>
-                                <textarea name="informacion" id="informacion" class="form-control" required cols="30" rows="10"></textarea>
+                                <small class="pb-2 d-block">Recomendamos siempre que al copiar y pegar información desde algun sitio o archivo <b>eliminar el formato</b> de los textos para un optimo funcionamiento, esto se puede realizar desde el mismo editor de texto presionando el siguiente botón <img src="{{asset('panel/img/clear-format.png')}}" alt="Clear format"></small>
+                                <textarea name="informacion" class="trumbowyg-panel" cols="30" rows="10"></textarea>
+                                {{-- <textarea name="informacion" id="informacion" class="form-control" required cols="30" rows="10"></textarea> --}}
                             </div>
                         </div>
                     </div>
@@ -133,7 +135,8 @@
                             </div>
                             <div class="col-12 mb-4">
                                 <label for="informacion">Información <span class="text-danger">*</span></label>
-                                <textarea name="informacion" id="informacionE" class="form-control" required cols="30" rows="10"></textarea>
+                                <small class="pb-2 d-block">Recomendamos siempre que al copiar y pegar información desde algun sitio o archivo <b>eliminar el formato</b> de los textos para un optimo funcionamiento, esto se puede realizar desde el mismo editor de texto presionando el siguiente botón <img src="{{asset('panel/img/clear-format.png')}}" alt="Clear format"></small>
+                                <textarea name="informacion" id="informacionE" class="trumbowyg-panel" cols="30" rows="10"></textarea>
                             </div>
                         </div>
                     </div>
@@ -162,7 +165,8 @@
             document.getElementById('informacionE').value = '';
 
             document.getElementById('tituloE').value = index['titulo'];
-            document.getElementById('informacionE').value = index['informacion'];
+            $('#informacionE').trumbowyg('html', index['informacion']);
+            // document.getElementById('informacionE').value = index['informacion'];
 
             $('#mdEdit').modal('show');
         }

@@ -8,5 +8,5 @@ class Establecimiento extends Model
 {
     protected $table = "establecimientos";
     protected $primaryKey = "id";
-    protected $fillable = [ "nombre", "cover", "lat", "lng", "telefono", "email" ];
+    protected $fillable = [ "nombre", "cover", "lat", "lng", "telefono", "email", "facebook", "instagram", "twitter", "whatsapp" ];
 }

@@ -34,10 +34,7 @@ body {
 	.titulos {
 		font-style: italic;
 		font-weight: 500;
-        font-size: 45px;
-
-		@media screen and (min-width: 768px){
-		}
+        font-size: clamp(35px, 3vw, 45px);
 	}
 
     p {

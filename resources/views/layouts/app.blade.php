@@ -17,10 +17,11 @@
         @include('includes.header')
         @yield('content')
         @include('includes.footer')
-        @stack('js')
+
         <script>
             const PATH = "{{url('/')}}"+"/";
         </script>
         <script src="{{mix('js/app.js')}}"></script>
+        @stack('js')
     </body>
 </html>
